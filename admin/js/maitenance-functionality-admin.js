@@ -56,7 +56,7 @@ jQuery(document).ready(function($) {
 
 		jQuery('#main-font-size').val( jQuery(this).css('font-size').replace('px', '') );
 		jQuery('#main-line-height').val( jQuery(this).css('line-height').replace('px', '') );
-		jQuery('#main-font-style').val( jQuery(this).css('font-style') );
+		jQuery('#main-font-weight').val( jQuery(this).css('font-weight') );
 		jQuery('.wp-colorpicker').wpColorPicker('color', jQuery(this).css('color'));
 	});
 
@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
 		jQuery( jQuery('#main-edited-text').val() ).css( jQuery(this).attr('id').replace('main-', ''), jQuery(this).val() + 'px' );
 	});
 
-	jQuery('#main-font-style').on('change', function() {
+	jQuery('#main-font-weight').on('change', function() {
 		jQuery( jQuery('#main-edited-text').val() ).css( jQuery(this).attr('id').replace('main-', ''), jQuery(this).val() );
 	});
 
@@ -134,6 +134,10 @@ jQuery(document).ready(function($) {
 		if ( jQuery('#main-mailchimp').length ) {
 			main_settings += '"mailchimp":'+JSON.stringify(jQuery('#main-mailchimp').val().replace(/"/g, "'")).replace(/\\n/g, '')+',';
 		}
+		// Access by ip
+		if ( jQuery('#main-access-by-ip').length ) {
+			main_settings += '"access-by-ip":"'+jQuery('#main-access-by-ip').val().replace(/\n/g, "|")+'",';
+		}
 		main_settings = main_settings.slice(0, -1);
 		main_settings += '}';
 		jQuery.ajax({
@@ -148,5 +152,18 @@ jQuery(document).ready(function($) {
 			}
 		});
 	})
+
+	jQuery(document).on('click', '.main-maintenance-dismiss', function() {
+		jQuery.ajax({
+			type: 'POST',
+			url: maintenance_main.ajaxurl,
+			data: { 
+				'action': 'main_dismiss_notice'
+			},
+			success: function(data) {
+				jQuery('.main-maintenance-notice').remove();
+			}
+		});
+	});
 
 });

@@ -35,6 +35,12 @@ class maitenance_func_Activator {
 		if ( !$settings ) {
 			update_option('main_maintenance_settings', main_get_settings());
 		}
+
+		$main_notice = get_option('main_maintenance_rating_notice');
+		
+		if ( !$main_notice ) {
+			update_option('main_maintenance_rating_notice', time());
+		}
 	}
 
 }

@@ -87,6 +87,7 @@
 	display: inline-block;
 	color: #fff;
 	text-decoration: none;
+	margin-top: 3px;
 }
 
 .maintenance-buttons a:hover {

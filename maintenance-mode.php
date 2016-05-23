@@ -147,7 +147,7 @@ function main_maintenance_settings() {
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="white-box">
-							<h3>Maintenance configuration</h3>
+							<h2>Maintenance configuration</h2>
 							<p class="text-muted m-b-30 font-13">You'll be able to configure all your needed maintenance settings here.</p>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Maintenance status</label>
@@ -175,7 +175,7 @@ function main_maintenance_settings() {
 								</div>
 							</div>
 							<div class="">
-								<h5><b>Google analytics</b></h5>
+								<h2>Google analytics</h2>
 								<div class="form-group clearfix">
 									<label for="pm-image-to-url" class="control-label col-md-3">Enable google analytics?</label>
 									<div class="input-wrapper col-md-9">
@@ -194,7 +194,7 @@ function main_maintenance_settings() {
 							</div>
 						</div>
 						<div class="white-box">
-							<h3>Maintenance texts</h3>
+							<h2>Maintenance texts</h2>
 							<p class="text-muted m-b-30 font-13">Here you can style and change your maintenance texts.</p>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Page headline</label>
@@ -211,11 +211,11 @@ function main_maintenance_settings() {
 							<div class="form-group text-styling-row">
 								<input type="hidden" id="main-edited-text" value="">
 								<div class="col-md-3">
-									<h5>Text color</h5>
-									<input type="number" id="main-color" class="text-styling wp-colorpicker" value="">
+									<h4>Text color</h4>
+									<input type="text" id="main-color" class="text-styling wp-colorpicker" value="">
 								</div>
 								<div class="col-md-3">
-									<h5>Text size</h5>
+									<h4>Text size</h4>
 									<div class="main-number-field">
 										<span class="main-number-minus">-</span>
 										<input type="number" id="main-font-size" class="form-control text-styling" value="">
@@ -223,7 +223,7 @@ function main_maintenance_settings() {
 									</div>
 								</div>
 								<div class="col-md-3">
-									<h5>Text line height</h5>
+									<h4>Text line height</h4>
 									<div class="main-number-field">
 										<span class="main-number-minus">-</span>
 										<input type="number" id="main-line-height" class="form-control text-styling" value="">
@@ -231,19 +231,21 @@ function main_maintenance_settings() {
 									</div>
 								</div>
 								<div class="col-md-3">
-									<h5>Text style</h5>
-									<select id="main-font-style" class="form-control text-styling">
-										<option value="normal">Normal</option>
-										<option value="italic">Italic</option>
+									<h4>Text style</h4>
+									<select id="main-font-weight" class="form-control text-styling">
+										<option value="400">Normal</option>
+										<option value="300">Light</option>
+										<option value="bold">Bold</option>
 									</select>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</div>
+						<?php do_action('main_maintenance_first_column_bottom'); ?>
 					</div>
 					<div class="col-sm-6">
 						<div class="white-box">
-							<h3>Maintenance mode looks</h3>
+							<h2>Maintenance mode looks</h2>
 							<p class="text-muted m-b-30 font-13">Here you'll be able to change what appears on your front page.</p>
 							<?php do_action('main_maintenance_looks_top'); ?>
 							<div class="form-group clearfix">
@@ -285,7 +287,7 @@ function main_maintenance_settings() {
 								</div>
 							</div>
 							<div class="form-group clearfix">
-								<h5><b>Social networks</b></h5>
+								<h2>Social networks</h2>
 								<div class="form-group clearfix">
 									<label for="pm-image-to-url" class="control-label col-md-3">Enable social networks?</label>
 									<div class="input-wrapper col-md-9">
@@ -496,15 +498,24 @@ function main_check_search_bots() {
 }
 
 function main_check_user_role() {
+	$user = wp_get_current_user();
 	$is_allowed = false;
+	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
 
-	// if (is_super_admin()) {
+	// if ( is_super_admin() ) {
 	// 	$is_allowed = true;
 	// }
 
-	// if (current_user_can('manage_options')) {
-	// 	$is_allowed = true;
-	// }
+	if ( isset($main_maintenance_settings['access-by-role']) ) {
+		$allowed = explode(',', $main_maintenance_settings['access-by-role']);
+		if ( array_intersect($allowed, $user->roles ) ) {
+			$is_allowed = true;
+		}
+
+		if ( $main_maintenance_settings['access-by-role'] == 'logged-in' && is_user_logged_in() ) {
+			$is_allowed = true;
+		}
+	}
 
 	return $is_allowed;
 }
@@ -513,11 +524,45 @@ function main_check_exclude() {
 	$is_excluded = false;
 	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
 
-	if ( $main_maintenance_settings['exclude'] ) {
+	if ( $main_maintenance_settings['exclude'] != '' ) {
 		$excludes = explode('|', $main_maintenance_settings['exclude']);
+		if ( isset($main_maintenance_settings['bypass-url']) ) {
+			$excludes[] = $main_maintenance_settings['bypass-url'];
+			$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+			$bypass_expire = ( isset($main_maintenance_settings['bypass-expires']) ? $main_maintenance_settings['bypass-expires'] : '172800' );
+			setcookie('main_maintenance_bypass', 'bypass', time() + (int)$bypass_expire, '/', false);
+		}
 		if ( !empty($excludes) ) {
 			foreach ($excludes as $exclude_item) {
 				if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $exclude_item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $exclude_item))) {
+					$is_excluded = true;
+					break;
+				}
+			}
+		}
+	}
+	if ( isset($main_maintenance_settings['bypass-url']) && $main_maintenance_settings['bypass-url'] != '' ) {
+		$excludes = array( $main_maintenance_settings['bypass-url'] );
+		$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+		$bypass_expire = ( isset($main_maintenance_settings['bypass-expires']) ? $main_maintenance_settings['bypass-expires'] : '172800' );
+		setcookie('main_maintenance_bypass', 'bypass', time() + (int)$bypass_expire, '/', false);
+		if ( !empty($excludes) ) {
+			foreach ($excludes as $exclude_item) {
+				if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $exclude_item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $exclude_item))) {
+					$is_excluded = true;
+					break;
+				}
+			}
+		}
+		if ( isset($_COOKIE['main_maintenance_bypass']) && $_COOKIE['main_maintenance_bypass'] == 'bypass' ) {
+			$is_excluded = true;
+		}
+	}
+	if ( isset($main_maintenance_settings['access-by-ip']) && $main_maintenance_settings['access-by-ip'] != '' ) {
+		$exclude_ip = explode('|', $main_maintenance_settings['access-by-ip']);
+		if ( !empty($exclude_ip) ) {
+			foreach ($exclude_ip as $ip_value) {
+				if ( !empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $ip_value) ) {
 					$is_excluded = true;
 					break;
 				}
@@ -536,3 +581,32 @@ function main_save_maintenance() {
 }
 add_action( 'wp_ajax_nopriv_main_save_maintenance_settings', 'main_save_maintenance' );
 add_action( 'wp_ajax_main_save_maintenance_settings', 'main_save_maintenance' );
+
+function sample_admin_notice__success() {
+	$user = wp_get_current_user();
+	?>
+	<div class="main-maintenance-notice">
+		<span class="main-notice-left"></span>
+		<div class="main-notice-center">
+			<p>Hi there, <?php echo $user->data->display_name; ?>, we noticed that you've been using our Maintenance mode plugin for a while now.</p>
+			<p>We spent many hours developing this free plugin for you and we would appriciate if you supported us by rating our plugin!</p>
+		</div>
+		<div class="main-notice-right">
+			<a href="#" class="button button-primary button-large main-maintenance-rate">Rate at WordPress</a>
+			<a href="javascript:void(0)" class="button button-large preview main-maintenance-dismiss">No, thanks</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<?php
+}
+if ( get_option('main_maintenance_rating_notice') != 'hide' && time() - get_option('main_maintenance_rating_notice') > 432000 ) {
+	add_action( 'admin_notices', 'sample_admin_notice__success' );
+}
+
+function main_dismiss_maintenance_notice() {
+	update_option('main_maintenance_rating_notice', 'hide');
+
+	die(0);
+}
+add_action( 'wp_ajax_nopriv_main_dismiss_notice', 'main_dismiss_maintenance_notice' );
+add_action( 'wp_ajax_main_dismiss_notice', 'main_dismiss_maintenance_notice' );
