@@ -171,11 +171,10 @@ function main_maintenance_settings() {
 								<label for="pm-image-to-url" class="control-label col-md-3">Exclude</label>
 								<div class="input-wrapper col-md-9">
 									<textarea id="main-exclude" class="form-control"><?php echo (isset($main_maintenance_settings['exclude']) && $main_maintenance_settings['exclude'] != ''?str_replace('|', PHP_EOL, $main_maintenance_settings['exclude']):''); ?></textarea>
-									<p class="text-muted m-b-30 font-13">You're able to exclude feeds, pages or IPs from maintenance mode. Add one exclude option per line!</p>
+									<p class="text-muted font-13">You're able to exclude feeds, pages or IPs from maintenance mode. Add one exclude option per line!</p>
 								</div>
 							</div>
 							<div class="">
-								<h2>Google analytics</h2>
 								<div class="form-group clearfix">
 									<label for="pm-image-to-url" class="control-label col-md-3">Enable google analytics?</label>
 									<div class="input-wrapper col-md-9">
@@ -186,7 +185,7 @@ function main_maintenance_settings() {
 									</div>
 								</div>
 								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Tracking code</label>
+									<label for="pm-image-to-url" class="control-label col-md-3">Analytics tracking code</label>
 									<div class="input-wrapper col-md-9">
 										<textarea id="main-google-analytics-code" class="form-control"><?php echo (isset($main_maintenance_settings['google-analytics-code']) && $main_maintenance_settings['google-analytics-code'] != '' ? $main_maintenance_settings['google-analytics-code'] : ''); ?></textarea>
 									</div>
@@ -245,7 +244,7 @@ function main_maintenance_settings() {
 					</div>
 					<div class="col-sm-6">
 						<div class="white-box">
-							<h2>Maintenance mode looks</h2>
+							<h2>Maintenance mode style</h2>
 							<p class="text-muted m-b-30 font-13">Here you'll be able to change what appears on your front page.</p>
 							<?php do_action('main_maintenance_looks_top'); ?>
 							<div class="form-group clearfix">
@@ -286,70 +285,70 @@ function main_maintenance_settings() {
 									<input type="text" id="main-page-title" class="form-control" value="<?php echo (isset($main_maintenance_settings['page-title'])?$main_maintenance_settings['page-title']:''); ?>">
 								</div>
 							</div>
+							<?php do_action('main_maintenance_looks_bottom'); ?>
+						</div>
+						<div class="white-box clearfix">
+							<h2>Social networks</h2>
 							<div class="form-group clearfix">
-								<h2>Social networks</h2>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Enable social networks?</label>
-									<div class="input-wrapper col-md-9">
-										<div class="main-maintenance-checkbox">
-											<span></span>
-											<input type="checkbox" id="main-social-networks" <?php echo ( isset($main_maintenance_settings['social-networks']) && $main_maintenance_settings['social-networks'] == 'true' ? 'checked' : '' ); ?>>
-										</div>
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Link targets</label>
-									<div class="input-wrapper col-md-9">
-										<select id="main-social-target" class="form-control">
-											<option value="new" <?php echo ( isset($main_maintenance_settings['social-target']) && $main_maintenance_settings['social-target'] == 'new' ? 'selected' : '' ); ?>>New page</option>
-											<option value="same" <?php echo ( isset($main_maintenance_settings['social-target']) && $main_maintenance_settings['social-target'] == 'same' ? 'selected' : '' ); ?>>Same page</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Github</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-github" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-github'])?$main_maintenance_settings['social-github']:''); ?>">
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Dribbble</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-dribbble" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-dribbble'])?$main_maintenance_settings['social-dribbble']:''); ?>">
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Twitter</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-twitter" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-twitter'])?$main_maintenance_settings['social-twitter']:''); ?>">
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Facebook</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-facebook" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-facebook'])?$main_maintenance_settings['social-facebook']:''); ?>">
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Pinterest</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-pinterest" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-pinterest'])?$main_maintenance_settings['social-pinterest']:''); ?>">
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">Google+</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-gplus" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-gplus'])?$main_maintenance_settings['social-gplus']:''); ?>">
-									</div>
-								</div>
-								<div class="form-group clearfix">
-									<label for="pm-image-to-url" class="control-label col-md-3">LinkedIn</label>
-									<div class="input-wrapper col-md-9">
-										<input type="text" id="main-social-linkedin" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-linkedin'])?$main_maintenance_settings['social-linkedin']:''); ?>">
+								<label for="pm-image-to-url" class="control-label col-md-3">Enable social networks?</label>
+								<div class="input-wrapper col-md-9">
+									<div class="main-maintenance-checkbox">
+										<span></span>
+										<input type="checkbox" id="main-social-networks" <?php echo ( isset($main_maintenance_settings['social-networks']) && $main_maintenance_settings['social-networks'] == 'true' ? 'checked' : '' ); ?>>
 									</div>
 								</div>
 							</div>
-							<?php do_action('main_maintenance_looks_bottom'); ?>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Link targets</label>
+								<div class="input-wrapper col-md-9">
+									<select id="main-social-target" class="form-control">
+										<option value="new" <?php echo ( isset($main_maintenance_settings['social-target']) && $main_maintenance_settings['social-target'] == 'new' ? 'selected' : '' ); ?>>New page</option>
+										<option value="same" <?php echo ( isset($main_maintenance_settings['social-target']) && $main_maintenance_settings['social-target'] == 'same' ? 'selected' : '' ); ?>>Same page</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Github</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-github" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-github'])?$main_maintenance_settings['social-github']:''); ?>">
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Dribbble</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-dribbble" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-dribbble'])?$main_maintenance_settings['social-dribbble']:''); ?>">
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Twitter</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-twitter" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-twitter'])?$main_maintenance_settings['social-twitter']:''); ?>">
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Facebook</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-facebook" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-facebook'])?$main_maintenance_settings['social-facebook']:''); ?>">
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Pinterest</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-pinterest" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-pinterest'])?$main_maintenance_settings['social-pinterest']:''); ?>">
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Google+</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-gplus" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-gplus'])?$main_maintenance_settings['social-gplus']:''); ?>">
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">LinkedIn</label>
+								<div class="input-wrapper col-md-9">
+									<input type="text" id="main-social-linkedin" class="form-control" value="<?php echo (isset($main_maintenance_settings['social-linkedin'])?$main_maintenance_settings['social-linkedin']:''); ?>">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -402,10 +401,11 @@ function main_get_content() {
 			});
 		</script>
 		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
-		<link href='https://fonts.googleapis.com/css?family=Merriweather:400|Montserrat:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
-		<div class="maintenance-wrapper">
+		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?>">
 			<?php if ( $main_maintenance_settings['maintenance-logo'] ) {
 				$logo_size_html = '';
 				if ( $main_maintenance_settings['maintenance-retina'] == 'true' ) {
@@ -419,8 +419,9 @@ function main_get_content() {
 			<div class="maintenance-inner">
 				<div class="maintenance-title" style="<?php echo $main_maintenance_settings['page-headline-style']; ?>"><?php echo $main_maintenance_settings['page-headline']; ?></div>
 				<?php if ( isset($main_maintenance_settings['countdown']) && $main_maintenance_settings['countdown'] != '' ) { ?>
-					<div id="main-clock"></div>
+					<!-- <div id="main-clock"></div> -->
 				<?php } ?>
+				<div id="main-clock"><div class="main-countdown-item"><span>07</span><span>Days</span></div><div class="main-countdown-item"><span>05</span><span>Hours</span></div><div class="main-countdown-item"><span>35</span><span>Minutes</span></div><div class="main-countdown-item"><span>11</span><span>Seconds</span></div><div class="clearfix"></div></div>
 				<p class="maintenance-description" style="<?php echo $main_maintenance_settings['page-description-style']; ?>"><?php echo $main_maintenance_settings['page-description']; ?></p>
 				<?php if ( $main_maintenance_settings['social-networks'] == 'true' ) { ?>
 				<div class="maintenance-buttons">
@@ -528,14 +529,16 @@ function main_check_exclude() {
 		$excludes = explode('|', $main_maintenance_settings['exclude']);
 		if ( isset($main_maintenance_settings['bypass-url']) ) {
 			$excludes[] = $main_maintenance_settings['bypass-url'];
-			$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
-			$bypass_expire = ( isset($main_maintenance_settings['bypass-expires']) ? $main_maintenance_settings['bypass-expires'] : '172800' );
-			setcookie('main_maintenance_bypass', 'bypass', time() + (int)$bypass_expire, '/', false);
 		}
 		if ( !empty($excludes) ) {
 			foreach ($excludes as $exclude_item) {
 				if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $exclude_item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $exclude_item))) {
 					$is_excluded = true;
+					$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+					if ( $exclude_item == $main_maintenance_settings['bypass-url'] ) {
+						$bypass_expire = ( isset($main_maintenance_settings['bypass-expires']) ? $main_maintenance_settings['bypass-expires'] : '172800' );
+						setcookie('main_maintenance_bypass', 'bypass', time() + (int)$bypass_expire, '/', false);
+					}
 					break;
 				}
 			}
@@ -543,13 +546,13 @@ function main_check_exclude() {
 	}
 	if ( isset($main_maintenance_settings['bypass-url']) && $main_maintenance_settings['bypass-url'] != '' ) {
 		$excludes = array( $main_maintenance_settings['bypass-url'] );
-		$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
-		$bypass_expire = ( isset($main_maintenance_settings['bypass-expires']) ? $main_maintenance_settings['bypass-expires'] : '172800' );
-		setcookie('main_maintenance_bypass', 'bypass', time() + (int)$bypass_expire, '/', false);
 		if ( !empty($excludes) ) {
 			foreach ($excludes as $exclude_item) {
 				if ((!empty($_SERVER['REMOTE_ADDR']) && strstr($_SERVER['REMOTE_ADDR'], $exclude_item)) || (!empty($_SERVER['REQUEST_URI']) && strstr($_SERVER['REQUEST_URI'], $exclude_item))) {
 					$is_excluded = true;
+					$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+					$bypass_expire = ( isset($main_maintenance_settings['bypass-expires']) ? $main_maintenance_settings['bypass-expires'] : '172800' );
+					setcookie('main_maintenance_bypass', 'bypass', time() + (int)$bypass_expire, '/', false);
 					break;
 				}
 			}
@@ -586,7 +589,9 @@ function sample_admin_notice__success() {
 	$user = wp_get_current_user();
 	?>
 	<div class="main-maintenance-notice">
-		<span class="main-notice-left"></span>
+		<span class="main-notice-left">
+			<img src="<?php echo maitenance_PLUGIN_URI; ?>admin/images/logo-square.png" alt="">
+		</span>
 		<div class="main-notice-center">
 			<p>Hi there, <?php echo $user->data->display_name; ?>, we noticed that you've been using our Maintenance mode plugin for a while now.</p>
 			<p>We spent many hours developing this free plugin for you and we would appriciate if you supported us by rating our plugin!</p>
