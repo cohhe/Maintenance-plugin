@@ -194,6 +194,7 @@ jQuery(document).ready(function($) {
 			selected_element.parent().find('li').removeClass('selected');
 			selected_element.addClass('selected');
 			selected_element.parent().parent().parent().find('#maintenance-template').removeClass('opened');
+			jQuery('#main-background-image').attr('value', maintenance_main.img_folder + selected_element.attr('data-value') + '-bg.jpg' );
 		}, 100);
 	});
 

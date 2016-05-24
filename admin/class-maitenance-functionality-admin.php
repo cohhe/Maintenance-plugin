@@ -100,7 +100,8 @@ class maitenance_func_Admin {
 		wp_enqueue_media();
 		wp_enqueue_script( $this->maitenance_func, plugin_dir_url( __FILE__ ) . 'js/maitenance-functionality-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );	
 		wp_localize_script( $this->maitenance_func, 'maintenance_main', array( 
-			'ajaxurl' => admin_url( 'admin-ajax.php' )
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'img_folder' => maitenance_PLUGIN_URI . 'public/images/'
 		));	
 	}
 

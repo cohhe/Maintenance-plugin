@@ -401,7 +401,7 @@ function main_get_content() {
 			});
 		</script>
 		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
-		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700' rel='stylesheet' type='text/css'>
 
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
@@ -419,9 +419,8 @@ function main_get_content() {
 			<div class="maintenance-inner">
 				<div class="maintenance-title" style="<?php echo $main_maintenance_settings['page-headline-style']; ?>"><?php echo $main_maintenance_settings['page-headline']; ?></div>
 				<?php if ( isset($main_maintenance_settings['countdown']) && $main_maintenance_settings['countdown'] != '' ) { ?>
-					<!-- <div id="main-clock"></div> -->
+					<div id="main-clock"></div>
 				<?php } ?>
-				<div id="main-clock"><div class="main-countdown-item"><span>07</span><span>Days</span></div><div class="main-countdown-item"><span>05</span><span>Hours</span></div><div class="main-countdown-item"><span>35</span><span>Minutes</span></div><div class="main-countdown-item"><span>11</span><span>Seconds</span></div><div class="clearfix"></div></div>
 				<p class="maintenance-description" style="<?php echo $main_maintenance_settings['page-description-style']; ?>"><?php echo $main_maintenance_settings['page-description']; ?></p>
 				<?php if ( $main_maintenance_settings['social-networks'] == 'true' ) { ?>
 				<div class="maintenance-buttons">
