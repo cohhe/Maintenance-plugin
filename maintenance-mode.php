@@ -366,6 +366,9 @@ function main_get_content() {
 	$main_template = (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default');
 	$template = $wpdb->get_results('SELECT template_html FROM '.$wpdb->prefix.'maintenance_plugin_templates WHERE template="' . $main_template . '"');
 
+	$wp_scripts = new WP_Scripts();
+	$jquery_src = ( !empty($wp_scripts->registered['jquery-core']) ? home_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' );
+
 	if (
 		$main_maintenance_settings['maintenance-status'] == 'true' &&
 		!strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
@@ -388,14 +391,17 @@ function main_get_content() {
 		header("$protocol 503 Service Unavailable", TRUE, 503);
 		?>
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/jquery.backstretch.min.js" type="text/javascript"></script>
+		
+		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
+		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700|Aldrich:400|Raleway:600|Iceberg:400' rel='stylesheet' type='text/css'>
 		<?php do_action('main_maintenance_head'); ?>
-		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
-		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
+		<?php
+		?>
+		<script src="<?php echo $jquery_src; ?>" type="text/javascript"></script>
+		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/jquery.backstretch.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				$.backstretch("<?php echo $main_maintenance_settings['background-image']; ?>");
+				jQuery.backstretch("<?php echo $main_maintenance_settings['background-image']; ?>");
 				<?php if ( $main_maintenance_settings['background-blur'] == 'true' ) { ?>
 					$(window).on("backstretch.after", function (e, instance, index) {
 						jQuery('.backstretch').addClass('blurred');
@@ -406,19 +412,25 @@ function main_get_content() {
 				} ?>
 			});
 		</script>
-		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
-		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700|Aldrich:400|Raleway:600|Iceberg:400' rel='stylesheet' type='text/css'>
-
+		<?php do_action('main_maintenance_footer'); ?>
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
 		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?>">
+			<?php if ( isset($main_maintenance_settings['animation']) && $main_maintenance_settings['animation'] != 'none' ) { ?>
+				<canvas id="main-animation-canvas"></canvas>
+			<?php } ?>
 			<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
 		</div>
 		<?php do_action('main_maintenance_video'); ?>
 
 		<?php
+		
 		ob_flush();
-
+		?>
+		
+		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
+		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
+		<?php
 		exit();
 	}	
 }
