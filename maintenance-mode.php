@@ -359,8 +359,12 @@ function main_maintenance_settings() {
 }
 
 function main_get_content() {
+	global $wpdb;
+
 	// SETTINGS
 	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+	$main_template = (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default');
+	$template = $wpdb->get_results('SELECT template_html FROM '.$wpdb->prefix.'maintenance_plugin_templates WHERE template="' . $main_template . '"');
 
 	if (
 		$main_maintenance_settings['maintenance-status'] == 'true' &&
@@ -387,6 +391,8 @@ function main_get_content() {
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/jquery.backstretch.min.js" type="text/javascript"></script>
 		<?php do_action('main_maintenance_head'); ?>
+		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
+		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$.backstretch("<?php echo $main_maintenance_settings['background-image']; ?>");
@@ -401,56 +407,12 @@ function main_get_content() {
 			});
 		</script>
 		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
-		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700|Aldrich:400|Raleway:600|Iceberg:400' rel='stylesheet' type='text/css'>
 
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
 		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?>">
-			<?php if ( $main_maintenance_settings['maintenance-logo'] ) {
-				$logo_size_html = '';
-				if ( $main_maintenance_settings['maintenance-retina'] == 'true' ) {
-					$logo_size = getimagesize( $main_maintenance_settings['maintenance-logo'] );
-					$logo_size_html = ' style="height: ' . ($logo_size[1] / 2) . 'px;" height="' . ($logo_size[1] / 2) . '"';
-				} ?>
-				<div class="maintenance-logo-wrapper">
-					<img src="<?php echo $main_maintenance_settings['maintenance-logo']; ?>" alt="logo" id="maintenance-logo"<?php echo $logo_size_html; ?>>
-				</div>
-			<?php } ?>
-			<div class="maintenance-inner">
-				<div class="maintenance-title" style="<?php echo $main_maintenance_settings['page-headline-style']; ?>"><?php echo $main_maintenance_settings['page-headline']; ?></div>
-				<?php if ( isset($main_maintenance_settings['countdown']) && $main_maintenance_settings['countdown'] != '' ) { ?>
-					<div id="main-clock"></div>
-				<?php } ?>
-				<p class="maintenance-description" style="<?php echo $main_maintenance_settings['page-description-style']; ?>"><?php echo $main_maintenance_settings['page-description']; ?></p>
-				<?php if ( $main_maintenance_settings['social-networks'] == 'true' ) { ?>
-				<div class="maintenance-buttons">
-					<?php if ( $main_maintenance_settings['social-github'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-github']; ?>" class="social-icons icon-github" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-					<?php if ( $main_maintenance_settings['social-dribbble'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-dribbble']; ?>" class="social-icons icon-dribbble" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-					<?php if ( $main_maintenance_settings['social-twitter'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-twitter']; ?>" class="social-icons icon-twitter" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-					<?php if ( $main_maintenance_settings['social-facebook'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-facebook']; ?>" class="social-icons icon-facebook" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-					<?php if ( $main_maintenance_settings['social-pinterest'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-pinterest']; ?>" class="social-icons icon-pinterest-circled" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-					<?php if ( $main_maintenance_settings['social-gplus'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-gplus']; ?>" class="social-icons icon-gplus" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-					<?php if ( $main_maintenance_settings['social-linkedin'] ) { ?>
-						<a href="<?php echo $main_maintenance_settings['social-linkedin']; ?>" class="social-icons icon-linkedin-squared" <?php echo ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') ?>></a>
-					<?php } ?>
-				</div>
-				<?php if ( isset($main_maintenance_settings['mailchimp']) && $main_maintenance_settings['mailchimp'] != '' ) {
-					echo '<div class="main-mailchimp-wrapper">' . $main_maintenance_settings['mailchimp'] . '</div>';
-				} ?>
-				<?php } ?>
-			</div>
+			<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
 		</div>
 		<?php do_action('main_maintenance_video'); ?>
 
@@ -614,3 +576,98 @@ function main_dismiss_maintenance_notice() {
 }
 add_action( 'wp_ajax_nopriv_main_dismiss_notice', 'main_dismiss_maintenance_notice' );
 add_action( 'wp_ajax_main_dismiss_notice', 'main_dismiss_maintenance_notice' );
+
+function main_get_template( $template ) {
+	// SETTINGS
+	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+
+	// switch ( $template ) {
+	// 	case 'default':
+			$output = array(
+				'texts' => array(
+					'title' => $main_maintenance_settings['page-headline'],
+					'description' => $main_maintenance_settings['page-description']
+					),
+				'styles' => array(
+					'title' => $main_maintenance_settings['page-headline-style'],
+					'description' => $main_maintenance_settings['page-description-style']
+					)
+			);
+	// 		break;
+	// }
+
+	echo json_encode( $output );
+}
+
+function main_get_logo( $main_maintenance_settings ) {
+	$output = '';
+	if ( $main_maintenance_settings['maintenance-logo'] ) {
+		$logo_size_html = '';
+		if ( $main_maintenance_settings['maintenance-retina'] == 'true' ) {
+			$logo_size = getimagesize( $main_maintenance_settings['maintenance-logo'] );
+			$logo_size_html = ' style="height: ' . ($logo_size[1] / 2) . 'px;" height="' . ($logo_size[1] / 2) . '"';
+		}
+
+		$output .= '
+		<div class="maintenance-logo-wrapper">
+			<img src="' . $main_maintenance_settings['maintenance-logo'] . '" alt="logo" id="maintenance-logo" ' . $logo_size_html . '>
+		</div>';
+	}
+	return $output;
+}
+
+function main_get_social( $main_maintenance_settings ) {
+	$output = '';
+	if ( $main_maintenance_settings['social-networks'] == 'true' ) {
+	$output .= '
+	<div class="maintenance-buttons">';
+		if ( $main_maintenance_settings['social-github'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-github'] . '" class="social-icons icon-github" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+		if ( $main_maintenance_settings['social-dribbble'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-dribbble'] . '" class="social-icons icon-dribbble" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+		if ( $main_maintenance_settings['social-twitter'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-twitter'] . '" class="social-icons icon-twitter" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+		if ( $main_maintenance_settings['social-facebook'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-facebook'] . '" class="social-icons icon-facebook" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+		if ( $main_maintenance_settings['social-pinterest'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-pinterest'] . '" class="social-icons icon-pinterest-circled" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+		if ( $main_maintenance_settings['social-gplus'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-gplus'] . '" class="social-icons icon-gplus" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+		if ( $main_maintenance_settings['social-linkedin'] ) {
+			$output .= '<a href="' . $main_maintenance_settings['social-linkedin'] . '" class="social-icons icon-linkedin-squared" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+		}
+	$output .= '</div>';
+	}
+	return $output;
+}
+
+function main_get_countdown( $main_maintenance_settings ) {
+	$output = '';
+	if ( isset($main_maintenance_settings['countdown']) && $main_maintenance_settings['countdown'] != '' ) {
+		$output .= '<div id="main-clock"></div>';
+	}
+	return $output;
+}
+
+function main_get_mailchimp( $main_maintenance_settings ) {
+	$output = '';
+	if ( isset($main_maintenance_settings['mailchimp']) && $main_maintenance_settings['mailchimp'] != '' ) {
+		$output .= '<div class="main-mailchimp-wrapper">' . $main_maintenance_settings['mailchimp'] . '</div>';
+	}
+	return $output;
+}
+
+function main_prepare_html( $template, $settings ) {
+	$output = str_replace('{main_maintenance_logo}', main_get_logo( $settings ), $template->template_html);
+	$output = str_replace('{main_maintenance_countdown}', main_get_countdown( $settings ), $output);
+	$output = str_replace('{main_maintenance_social}', main_get_social( $settings ), $output);
+	$output = str_replace('{main_maintenance_mailchimp}', main_get_mailchimp( $settings ), $output);
+	
+	echo $output;
+}

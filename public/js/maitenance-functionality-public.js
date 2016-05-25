@@ -33,7 +33,15 @@
 })( jQuery );
 
 jQuery(document).ready(function($) {
-	
+	var content_data = jQuery.parseJSON( jQuery('#main-template-data').html() );
+	// Add text
+	jQuery.each(content_data.texts, function(index, value) {
+		jQuery('[data-content='+index+']').html( value );
+	});
+	// Add style
+	jQuery.each(content_data.styles, function(index, value) {
+		jQuery('[data-content='+index+']').attr( 'style', value );
+	});
 });
 
 jQuery(window).load(function() {

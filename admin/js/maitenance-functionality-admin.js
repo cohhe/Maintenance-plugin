@@ -65,7 +65,7 @@ jQuery(document).ready(function($) {
 			jQuery( jQuery('#main-edited-text').val() ).css( 'color', ui.color.toString() );
 		},
 		clear: function() {
-			// jQuery('.email-popup-preview-box-overlay').css('background', '');
+			jQuery( jQuery('#main-edited-text').val() ).css( 'color', '#fff' );
 		}
 	});
 
