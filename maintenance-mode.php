@@ -398,10 +398,8 @@ function main_get_content() {
 		<?php
 		?>
 		<script src="<?php echo $jquery_src; ?>" type="text/javascript"></script>
-		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/jquery.backstretch.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				jQuery.backstretch("<?php echo $main_maintenance_settings['background-image']; ?>");
 				<?php if ( $main_maintenance_settings['background-blur'] == 'true' ) { ?>
 					$(window).on("backstretch.after", function (e, instance, index) {
 						jQuery('.backstretch').addClass('blurred');
@@ -412,6 +410,9 @@ function main_get_content() {
 				} ?>
 			});
 		</script>
+		<?php if ( $main_maintenance_settings['background-image'] != '' ) { ?>
+			<style type="text/css">body{background: url(<?php echo $main_maintenance_settings['background-image']; ?>) no-repeat;background-size:cover;background-position:center;}</style>
+		<?php } ?>
 		<?php do_action('main_maintenance_footer'); ?>
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
