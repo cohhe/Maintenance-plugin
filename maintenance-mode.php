@@ -158,6 +158,20 @@ function main_maintenance_settings() {
 									</div>
 								</div>
 							</div>
+							<?php do_action('main_maintenance_config_top'); ?>
+							<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
+								<div class="form-group clearfix">
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Login form</label>
+										<div class="input-wrapper col-md-9">
+											<div class="main-maintenance-checkbox disabled">
+												<span></span>
+												<input type="checkbox" id="main-profeature9">
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php } ?>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Robots Meta Tag</label>
 								<div class="input-wrapper col-md-9">
@@ -170,7 +184,7 @@ function main_maintenance_settings() {
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Exclude</label>
 								<div class="input-wrapper col-md-9">
-									<textarea id="main-exclude" class="form-control"><?php echo (isset($main_maintenance_settings['exclude']) && $main_maintenance_settings['exclude'] != ''?str_replace('|', PHP_EOL, $main_maintenance_settings['exclude']):''); ?></textarea>
+									<textarea id="main-exclude" class="form-control"><?php echo (isset($main_maintenance_settings['exclude']) && $main_maintenance_settings['exclude'] != ''?str_replace('|', PHP_EOL, $main_maintenance_settings['exclude']):'feed'.PHP_EOL.'wp-login'.PHP_EOL.'login'); ?></textarea>
 									<p class="text-muted font-13">You're able to exclude feeds, pages or IPs from maintenance mode. Add one exclude option per line!</p>
 								</div>
 							</div>
@@ -207,6 +221,7 @@ function main_maintenance_settings() {
 									<div id="main-page-description" class="form-control textarea" spellcheck="false" contenteditable="true" style="<?php echo (isset($main_maintenance_settings['page-description-style'])?$main_maintenance_settings['page-description-style']:''); ?>"><?php echo (isset($main_maintenance_settings['page-description'])?$main_maintenance_settings['page-description']:''); ?></div>
 								</div>
 							</div>
+							<?php do_action('main_maintenance_text_style_bottom'); ?>
 							<div class="form-group text-styling-row">
 								<input type="hidden" id="main-edited-text" value="">
 								<div class="col-md-3">
@@ -241,12 +256,91 @@ function main_maintenance_settings() {
 							</div>
 						</div>
 						<?php do_action('main_maintenance_first_column_bottom'); ?>
+						<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
+								<div class="white-box">
+									<h2>Access controls</h2>
+									<p class="text-muted m-b-30 font-13">Here you can control who can access your site.</p>
+									<div class="form-group bypass-url clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Bypass url</label>
+										<div class="input-wrapper col-md-9">
+											<?php echo '<b>'.get_home_url().'/</b>'; ?><input type="text" id="main-profeature1" class="form-control profeature" value="" disabled>
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Bypass expires</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature2" class="form-control profeature" value="" disabled>
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Access by IP</label>
+										<div class="input-wrapper col-md-9">
+											<textarea id="main-profeature3" class="form-control profeature" disabled></textarea>
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Access by Role</label>
+										<div class="input-wrapper col-md-9">
+											<select id="main-profeature4" class="form-control profeature" multiple disabled>
+												<option value="1">Anyone logged in</option>
+												<option value="2">Administrator</option>
+												<option value="3">Editor</option>
+												<option value="4">Author</option>
+												<option value="5">Contributor</option>
+												<option value="6">Subscriber</option>
+											</select>
+										</div>
+									</div>
+								</div>
+						<?php } ?>
 					</div>
 					<div class="col-sm-6">
 						<div class="white-box">
 							<h2>Maintenance mode style</h2>
 							<p class="text-muted m-b-30 font-13">Here you'll be able to change what appears on your front page.</p>
 							<?php do_action('main_maintenance_looks_top'); ?>
+							<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
+								<div class="form-group clearfix main-grayed">
+									<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Maintenance template</label>
+									<div class="input-wrapper file-upload col-md-9">
+										<div class="main-fake-select" data-selected="default">
+											<ul>
+												<li data-value="default" data-image="" class="selected">Default</li>
+												<li data-value="style2" data-image="" class="cant-select">Style 2 - PRO version only</li>
+												<li data-value="style3" data-image="" class="cant-select">Style 3 - PRO version only</li>
+												<li data-value="style4" data-image="" class="cant-select">Style 4 - PRO version only</li>
+												<li data-value="style5" data-image="" class="cant-select">Style 5 - PRO version only</li>
+												<li data-value="style6" data-image="" class="cant-select">Style 6 - PRO version only</li>
+												<li data-value="style7" data-image="" class="cant-select">Style 7 - PRO version only</li>
+												<li data-value="style8" data-image="" class="cant-select">Style 8 - PRO version only</li>
+												<li data-value="style9" data-image="" class="cant-select">Style 9 - PRO version only</li>
+												<li data-value="style10" data-image="" class="cant-select">Style 10 - PRO version only</li>
+												<li data-value="style11" data-image="" class="cant-select">Style 11 - PRO version only</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix main-grayed">
+									<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Background video</label>
+									<div class="input-wrapper file-upload col-md-9">
+										<a href="javascript:void(0)" class="choose-image">Choose video</a>
+										<input type="text" id="main-profeature5" class="form-control" value="" disabled>
+										<p class="text-muted font-13">If a video is added, the background image is going to be overwritten with a video.</p>
+									</div>
+								</div>
+								<div class="form-group clearfix main-grayed">
+									<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Background animation</label>
+									<div class="input-wrapper file-upload col-md-9">
+										<select id="main-profeature6" class="form-control">
+											<option value="none" selected>None</option>
+											<option value="profeature1">Interactive lines</option>
+											<option value="profeature2">Raising bubbles</option>
+											<option value="profeature3">Spewing triangles</option>
+											<option value="profeature4">Rotating lines</option>
+										</select>
+									</div>
+								</div>
+							<?php } ?>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Background image</label>
 								<div class="input-wrapper file-upload col-md-9">
@@ -286,6 +380,26 @@ function main_maintenance_settings() {
 								</div>
 							</div>
 							<?php do_action('main_maintenance_looks_bottom'); ?>
+							<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
+								<div class="form-group clearfix">
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">MailChimp form</label>
+										<div class="input-wrapper col-md-9">
+											<textarea id="main-profeature7" class="form-control" disabled></textarea>
+											<p class="text-muted font-13">Want to display your MailChimp signup form at the front page? Add it here!</p>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Countdown till</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature8" class="form-control" value="" disabled>
+											<p class="text-muted font-13">Whant your visitorn to know when your site is going to be back? Add a countdown to your page!</p>
+										</div>
+									</div>
+								</div>
+							<?php } ?>
 						</div>
 						<div class="white-box clearfix">
 							<h2>Social networks</h2>
@@ -414,6 +528,13 @@ function main_get_content() {
 			<style type="text/css">body{background: url(<?php echo $main_maintenance_settings['background-image']; ?>) no-repeat;background-size:cover;background-position:center;}</style>
 		<?php } ?>
 		<?php do_action('main_maintenance_footer'); ?>
+		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		var ajax_login_object = {"ajaxurl":"http:\/\/localhost\/clean\/wp-admin\/admin-ajax.php","redirecturl":"http:\/\/localhost\/snaptube","loadingmessage":"Sending user info, please wait...","registermessage":"A password will be emailed to you for future use"};
+		/* ]]> */
+		</script>
+		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
 		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?>">
@@ -421,6 +542,14 @@ function main_get_content() {
 				<canvas id="main-animation-canvas"></canvas>
 			<?php } ?>
 			<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
+			<?php if ( isset($main_maintenance_settings['maintenance-login']) && $main_maintenance_settings['maintenance-login'] == 'true' && !is_user_logged_in() ) { ?>
+			<div class="main-maintenance-login">
+				<h1><?php _e('Login', 'vh'); ?></h1>
+				<span class="main-maintenance-login-open"></span>
+				<?php wp_login_form( array('label_username'=>'Username', 'label_password'=>'Password') ); ?>
+				<a href="<?php echo wp_lostpassword_url(); ?>" class="forgot_password"><?php _e( 'Forgot password', 'vh' ); ?></a>
+			</div>
+			<?php } ?>
 		</div>
 		<?php do_action('main_maintenance_video'); ?>
 
@@ -429,8 +558,7 @@ function main_get_content() {
 		ob_flush();
 		?>
 		
-		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
-		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
+		
 		<?php
 		exit();
 	}	
@@ -501,7 +629,7 @@ function main_check_exclude() {
 
 	if ( $main_maintenance_settings['exclude'] != '' ) {
 		$excludes = explode('|', $main_maintenance_settings['exclude']);
-		if ( isset($main_maintenance_settings['bypass-url']) ) {
+		if ( isset($main_maintenance_settings['bypass-url']) && $main_maintenance_settings['bypass-url'] != '' ) {
 			$excludes[] = $main_maintenance_settings['bypass-url'];
 		}
 		if ( !empty($excludes) ) {
@@ -684,3 +812,29 @@ function main_prepare_html( $template, $settings ) {
 	
 	echo $output;
 }
+
+function main_ajax_login() {
+
+	// First check the nonce, if it fails the function will break
+	check_ajax_referer( 'ajax-login-nonce', 'security' );
+
+	// Nonce is checked, get the POST data and sign user on
+	$info                  = array();
+	$info['user_login']    = $_POST['username'];
+	$info['user_password'] = $_POST['password'];
+	$info['remember']      = true;
+
+	$user_signon = wp_signon( $info, false );
+	if ( is_wp_error($user_signon) ){
+		echo json_encode(array('loggedin' => false, 'message' => __('Wrong username or password.', 'vh')));
+	} else {
+		echo json_encode(array('loggedin' => true, 'message' => __('Login successful, redirecting...', 'vh')));
+	}
+
+	die(1);
+}
+if ( isset($_POST['action']) && $_POST['action'] == 'ajaxlogin' ) {
+	main_ajax_login();
+}
+// add_action( 'wp_ajax_nopriv_ajaxlogin', 'main_ajax_login' );
+// add_action( 'wp_ajax_ajaxlogin', 'main_ajax_login' );

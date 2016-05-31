@@ -21,6 +21,7 @@ body {
 	position: relative;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 
 .maintenance-inner {
@@ -157,6 +158,106 @@ body {
 	margin: 0 auto;
 }
 
+/* Login */
+
+.main-maintenance-login {
+	position: absolute;
+	z-index: 2222;
+	right: -269px;
+	padding: 35px;
+	background-color: #f3f3f3;
+	border-radius: 5px 0 0 5px;
+	font-family: 'Roboto';
+
+    -webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.main-maintenance-login h1 {
+	margin: 0;
+	font-weight: 400;
+	font-size: 25px;
+	margin-bottom: 10px;
+}
+
+.main-maintenance-login input[type=text],
+.main-maintenance-login input[type=password] {
+	border: none;
+	background: #fefefe;
+	padding: 11px 15px;
+	color: #949494;
+	outline: none !important;
+}
+
+.main-maintenance-login input[type=submit] {
+	background: #45d884;
+	color: #fff;
+	border: none;
+	display: block;
+	width: 100%;
+	font-size: 17px;
+	padding: 12px 0px;
+	border-radius: 3px;
+	margin-top: 10px;
+	outline: none !important;
+	cursor: pointer;
+}
+
+.main-maintenance-login p {
+	margin: 2px 0;
+}
+
+.main-maintenance-login a {
+	color: #666;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+.main-maintenance-login label {
+	display: none;
+}
+
+.main-maintenance-login .login-remember label {
+	display: block;
+}
+
+.main-maintenance-login .login-remember {
+	margin-top: 10px;
+}
+
+.main-maintenance-login form {
+	margin-bottom: 0;
+}
+
+.main-maintenance-login input[type=checkbox]{
+	position: relative;
+	bottom: -1px;
+}
+
+.main-maintenance-login-open {
+	width: 0;
+	height: 0;
+	display: block;
+	position: relative;
+	left: -85px;
+	cursor: pointer;
+}
+
+.main-maintenance-login .main-maintenance-login-open:before {
+	content: '\e807';
+	font-family: 'options';
+	width: 50px;
+	height: 50px;
+	line-height: 54px;
+	text-align: center;
+	font-size: 28px;
+	display: block;
+	background-color: #f3f3f3;
+}
+
 /* Responsiveness */
 
 @media (max-width: 480px) {
@@ -256,3 +357,4 @@ body {
 .icon-gplus:before { content: '\e804'; } /* '' */
 .icon-linkedin-squared:before { content: '\e805'; } /* '' */
 .icon-github:before { content: '\e806'; } /* '' */
+.icon-lock-open-alt:before { content: '\e807'; } /* '' */

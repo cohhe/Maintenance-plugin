@@ -44,6 +44,42 @@ jQuery(document).ready(function($) {
 			jQuery('[data-content='+index+']').attr( 'style', value );
 		});
 	}
+
+	// jQuery('.main-maintenance-login #login_button').on('click', function(e) {
+	// 	jQuery('.main-maintenance-login #login p.status').show().text(ajax_login_object.loadingmessage);
+	// 	jQuery.ajax({
+	// 		type: 'POST',
+	// 		dataType: 'json',
+	// 		url: ajax_login_object.ajaxurl,
+	// 		data: { 
+	// 			'action': 'ajaxlogin',
+	// 			'username': jQuery('.main-maintenance-login #login #username').val(), 
+	// 			'password': jQuery('.main-maintenance-login #login #password').val(), 
+	// 			'security': jQuery('.main-maintenance-login #login #security').val()
+	// 		},
+	// 		success: function(data) {
+	// 			jQuery('.main-maintenance-login #login p.status').text(data.message);
+	// 			if (data.loggedin == true) {
+	// 				document.location.href = ajax_login_object.redirecturl;
+	// 			}
+	// 		}
+	// 	});
+	// 	e.preventDefault();
+	// });
+
+	if ( jQuery('.main-maintenance-login').length ) {
+		jQuery('#user_login').attr('placeholder', jQuery('#user_login').parent().find('label').html() );
+		jQuery('#user_pass').attr('placeholder', jQuery('#user_pass').parent().find('label').html() );
+	}
+
+	jQuery(document).on('click', '.main-maintenance-login-open', function() {
+		if ( jQuery('.main-maintenance-login').css('right') == '0px' ) {
+			jQuery('.main-maintenance-login').css('right', '-269px');
+		} else {
+			jQuery('.main-maintenance-login').css('right', '0px');
+		}
+	});
+
 });
 
 jQuery(window).load(function() {

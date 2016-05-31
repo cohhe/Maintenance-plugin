@@ -33,7 +33,7 @@
 
 jQuery(document).ready(function($) {
 
-	jQuery(document).on('click', '.main-maintenance-checkbox', function() {
+	jQuery(document).on('click', '.main-maintenance-checkbox:not(.disabled)', function() {
 		jQuery(this).toggleClass('active')
 		if ( jQuery(this).find('input').is(':checked') ) {
 			jQuery(this).find('input').prop('checked', false);
@@ -104,11 +104,11 @@ jQuery(document).ready(function($) {
 	jQuery(document).on('click', '.save-main-maintenance', function() {
 		var main_settings = '{';
 		// Text inputs, selects
-		jQuery('.main-maintenance-wrapper input[type=text], .main-maintenance-wrapper select:not(.text-styling)').each(function() {
+		jQuery('.main-maintenance-wrapper input[type=text]:not(.profeature), .main-maintenance-wrapper select:not(.text-styling):not(.profeature)').each(function() {
 			main_settings += '"'+jQuery(this).attr('id').replace('main-', '')+'":"'+jQuery(this).val()+'",';
 		});
 		// Checkboxes
-		jQuery('.main-maintenance-wrapper input[type=checkbox]').each(function() {
+		jQuery('.main-maintenance-wrapper input[type=checkbox]:not(.profeature)').each(function() {
 			if ( jQuery(this).is(':checked') ) {
 				var checkbox_val = 'true';
 			} else {
@@ -186,7 +186,7 @@ jQuery(document).ready(function($) {
 		
 	});
 
-	jQuery(document).on('click', '.main-fake-select li', function() {
+	jQuery(document).on('click', '.main-fake-select li:not(.cant-select)', function() {
 		var selected_element = jQuery(this);
 		setTimeout(function() {
 			selected_element.parent().parent().attr('data-selected', selected_element.attr('data-value'));
@@ -202,4 +202,5 @@ jQuery(document).ready(function($) {
 		jQuery(this).parent().parent().parent().find('#maintenance-template').addClass('opened');
 		jQuery(this).parent().parent().parent().find('#maintenance-template').css('background', 'url(' + jQuery(this).attr('data-image') + ') no-repeat #fff');
 	});
+
 });
