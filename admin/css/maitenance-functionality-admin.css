@@ -503,6 +503,19 @@ p {
 	cursor: no-drop;
 }
 
+.main-grayed:hover:before {
+	content: 'This feature is only available for the Popup Manager Pro version! <a href="http://asd.lv">a</a>';
+	position: absolute;
+	z-index: 11;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	padding: 5px 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	margin-top: 5px;
+	margin-left: 35px;
+}
+
 .main-fake-select li.cant-select {
 	color: #ccc;
 	cursor: no-drop;

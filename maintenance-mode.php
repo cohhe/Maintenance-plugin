@@ -544,10 +544,12 @@ function main_get_content() {
 			<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
 			<?php if ( isset($main_maintenance_settings['maintenance-login']) && $main_maintenance_settings['maintenance-login'] == 'true' && !is_user_logged_in() ) { ?>
 			<div class="main-maintenance-login">
-				<h1><?php _e('Login', 'vh'); ?></h1>
-				<span class="main-maintenance-login-open"></span>
-				<?php wp_login_form( array('label_username'=>'Username', 'label_password'=>'Password') ); ?>
-				<a href="<?php echo wp_lostpassword_url(); ?>" class="forgot_password"><?php _e( 'Forgot password', 'vh' ); ?></a>
+				<div>
+					<h1><?php _e('Login', 'vh'); ?></h1>
+					<span class="main-maintenance-login-open"></span>
+					<?php wp_login_form( array('label_username'=>'Username', 'label_password'=>'Password') ); ?>
+					<a href="<?php echo wp_lostpassword_url(); ?>" class="forgot_password"><?php _e( 'Forgot password', 'vh' ); ?></a>
+				</div>
 			</div>
 			<?php } ?>
 		</div>

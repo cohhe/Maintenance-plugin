@@ -93,6 +93,7 @@ body {
 	color: #fff;
 	text-decoration: none;
 	margin-top: 3px;
+	margin-right: 3px;
 }
 
 .maintenance-buttons a:hover {
@@ -163,17 +164,27 @@ body {
 .main-maintenance-login {
 	position: absolute;
 	z-index: 2222;
-	right: -269px;
+	top: 15%;
+	right: 0;
+	font-family: 'Roboto';
+}
+
+.main-maintenance-login > div {
 	padding: 35px;
 	background-color: #f3f3f3;
+	position: relative;
+	right: -100%;
 	border-radius: 5px 0 0 5px;
-	font-family: 'Roboto';
 
-    -webkit-transition: all 0.2s;
+	-webkit-transition: all 0.2s;
 	-moz-transition: all 0.2s;
 	-ms-transition: all 0.2s;
 	-o-transition: all 0.2s;
 	transition: all 0.2s;
+}
+
+.main-maintenance-login > div.opened {
+	right: 0%;
 }
 
 .main-maintenance-login h1 {

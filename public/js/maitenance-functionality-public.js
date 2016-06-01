@@ -73,11 +73,7 @@ jQuery(document).ready(function($) {
 	}
 
 	jQuery(document).on('click', '.main-maintenance-login-open', function() {
-		if ( jQuery('.main-maintenance-login').css('right') == '0px' ) {
-			jQuery('.main-maintenance-login').css('right', '-269px');
-		} else {
-			jQuery('.main-maintenance-login').css('right', '0px');
-		}
+		jQuery(this).parent().toggleClass('opened');
 	});
 
 });
