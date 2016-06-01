@@ -167,6 +167,7 @@ body {
 	top: 15%;
 	right: 0;
 	font-family: 'Roboto';
+	-webkit-font-smoothing: antialiased;
 }
 
 .main-maintenance-login > div {
@@ -201,6 +202,10 @@ body {
 	padding: 11px 15px;
 	color: #949494;
 	outline: none !important;
+	font-family: 'Roboto';
+	font-size: 14px;
+	min-width: 200px;
+	padding-left: 45px;
 }
 
 .main-maintenance-login input[type=submit] {
@@ -215,6 +220,7 @@ body {
 	margin-top: 10px;
 	outline: none !important;
 	cursor: pointer;
+	font-family: 'Roboto';
 }
 
 .main-maintenance-login p {
@@ -267,6 +273,34 @@ body {
 	font-size: 28px;
 	display: block;
 	background-color: #f3f3f3;
+}
+
+.login-username,
+.login-password {
+	position: relative;
+}
+
+.login-username:before,
+.login-password:before {
+	font-family: "options";
+	position: absolute;
+	font-size: 25px;
+	top: 6px;
+	left: 14px;
+	color: #949494;
+}
+
+.login-username:before {
+	content: '\e808';
+}
+
+.login-password:before {
+	content: '\e809';
+	left: 16px;
+}
+
+.login-remember label {
+	line-height: 20px;
 }
 
 /* Responsiveness */
@@ -369,3 +403,5 @@ body {
 .icon-linkedin-squared:before { content: '\e805'; } /* '' */
 .icon-github:before { content: '\e806'; } /* '' */
 .icon-lock-open-alt:before { content: '\e807'; } /* '' */
+.icon-user:before { content: '\e808'; } /* '' */
+.icon-lock:before { content: '\e809'; } /* '' */
