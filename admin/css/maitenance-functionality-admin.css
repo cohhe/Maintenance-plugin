@@ -1,4 +1,4 @@
-/**
+﻿/**
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
@@ -504,7 +504,7 @@ p {
 }
 
 .main-grayed:hover:before {
-	content: 'This feature is only available for the Popup Manager Pro version! <a href="http://asd.lv">a</a>';
+	content: 'This feature is only available for the Popup Manager Pro version!';
 	position: absolute;
 	z-index: 11;
 	background: rgba(0,0,0,0.6);
