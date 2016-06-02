@@ -105,7 +105,11 @@ jQuery(document).ready(function($) {
 		var main_settings = '{';
 		// Text inputs, selects
 		jQuery('.main-maintenance-wrapper input[type=text]:not(.profeature), .main-maintenance-wrapper select:not(.text-styling):not(.profeature)').each(function() {
-			main_settings += '"'+jQuery(this).attr('id').replace('main-', '')+'":"'+jQuery(this).val()+'",';
+			var input_value = jQuery(this).val();
+			if ( typeof jQuery(this).val() == 'string' ) {
+				input_value = jQuery(this).val().replace(/"/g, "'");
+			}
+			main_settings += '"'+jQuery(this).attr('id').replace('main-', '')+'":"'+input_value+'",';
 		});
 		// Checkboxes
 		jQuery('.main-maintenance-wrapper input[type=checkbox]:not(.profeature)').each(function() {

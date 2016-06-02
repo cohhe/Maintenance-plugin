@@ -229,8 +229,10 @@ body {
 
 .main-maintenance-login a {
 	color: #666;
-	margin-top: 10px;
-	display: inline-block;
+    margin-top: 20px;
+    display: block;
+    text-align: right;
+    font-size: 14px;
 }
 
 .main-maintenance-login label {
@@ -250,8 +252,8 @@ body {
 }
 
 .main-maintenance-login input[type=checkbox]{
-	position: relative;
-	bottom: -1px;
+	margin-bottom: 4px;
+	vertical-align: bottom;
 }
 
 .main-maintenance-login-open {
@@ -405,3 +407,7 @@ body {
 .icon-lock-open-alt:before { content: '\e807'; } /* '' */
 .icon-user:before { content: '\e808'; } /* '' */
 .icon-lock:before { content: '\e809'; } /* '' */
+.icon-location:before { content: '\e80a'; } /* '' */
+.icon-phone-1:before { content: '\e80b'; } /* '' */
+.icon-mail:before { content: '\e80c'; } /* '' */
+.icon-paper-plane:before { content: '\e80d'; } /* '' */

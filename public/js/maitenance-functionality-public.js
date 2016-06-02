@@ -76,6 +76,10 @@ jQuery(document).ready(function($) {
 		jQuery(this).parent().toggleClass('opened');
 	});
 
+	jQuery(document).on('click', '.contact-us-open', function() {
+		jQuery(this).parent().toggleClass('opened');
+	});
+
 });
 
 jQuery(window).load(function() {

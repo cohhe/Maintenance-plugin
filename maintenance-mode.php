@@ -507,7 +507,7 @@ function main_get_content() {
 
 		
 		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
-		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700|Aldrich:400|Raleway:600|Iceberg:400' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700|Aldrich:400|Raleway:300:400:600|Iceberg:400' rel='stylesheet' type='text/css'>
 		<?php do_action('main_maintenance_head'); ?>
 		<?php
 		?>
@@ -529,11 +529,6 @@ function main_get_content() {
 		<?php } ?>
 		<?php do_action('main_maintenance_footer'); ?>
 		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
-		<script type="text/javascript">
-		/* <![CDATA[ */
-		var ajax_login_object = {"ajaxurl":"http:\/\/localhost\/clean\/wp-admin\/admin-ajax.php","redirecturl":"http:\/\/localhost\/snaptube","loadingmessage":"Sending user info, please wait...","registermessage":"A password will be emailed to you for future use"};
-		/* ]]> */
-		</script>
 		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
@@ -552,6 +547,10 @@ function main_get_content() {
 				</div>
 			</div>
 			<?php } ?>
+			<?php if ( function_exists('run_maintenancepro_func') ) {
+				// && isset($main_maintenance_settings['template']) && $main_maintenance_settings['template'] != 'style5'
+				do_action('main_maintenance_contact_us');
+			} ?>
 		</div>
 		<?php do_action('main_maintenance_video'); ?>
 
@@ -724,20 +723,16 @@ function main_get_template( $template ) {
 	// SETTINGS
 	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
 
-	// switch ( $template ) {
-	// 	case 'default':
-			$output = array(
-				'texts' => array(
-					'title' => $main_maintenance_settings['page-headline'],
-					'description' => $main_maintenance_settings['page-description']
-					),
-				'styles' => array(
-					'title' => $main_maintenance_settings['page-headline-style'],
-					'description' => $main_maintenance_settings['page-description-style']
-					)
-			);
-	// 		break;
-	// }
+	$output = array(
+		'texts' => array(
+			'title' => $main_maintenance_settings['page-headline'],
+			'description' => $main_maintenance_settings['page-description']
+			),
+		'styles' => array(
+			'title' => $main_maintenance_settings['page-headline-style'],
+			'description' => $main_maintenance_settings['page-description-style']
+			)
+	);
 
 	echo json_encode( $output );
 }
@@ -814,29 +809,3 @@ function main_prepare_html( $template, $settings ) {
 	
 	echo $output;
 }
-
-function main_ajax_login() {
-
-	// First check the nonce, if it fails the function will break
-	check_ajax_referer( 'ajax-login-nonce', 'security' );
-
-	// Nonce is checked, get the POST data and sign user on
-	$info                  = array();
-	$info['user_login']    = $_POST['username'];
-	$info['user_password'] = $_POST['password'];
-	$info['remember']      = true;
-
-	$user_signon = wp_signon( $info, false );
-	if ( is_wp_error($user_signon) ){
-		echo json_encode(array('loggedin' => false, 'message' => __('Wrong username or password.', 'vh')));
-	} else {
-		echo json_encode(array('loggedin' => true, 'message' => __('Login successful, redirecting...', 'vh')));
-	}
-
-	die(1);
-}
-if ( isset($_POST['action']) && $_POST['action'] == 'ajaxlogin' ) {
-	main_ajax_login();
-}
-// add_action( 'wp_ajax_nopriv_ajaxlogin', 'main_ajax_login' );
-// add_action( 'wp_ajax_ajaxlogin', 'main_ajax_login' );
