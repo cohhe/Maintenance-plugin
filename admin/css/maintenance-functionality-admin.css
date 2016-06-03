@@ -525,6 +525,15 @@ p {
 	display: none;
 }
 
+#main-reset-defaults {
+	background: #6164c1;
+	border: 1px solid #6164c1;
+	color: #fff;
+	text-decoration: none;
+	margin-left: 20px;
+	padding: 5px;
+}
+
 @font-face {
   font-family: 'options2';
   src: url('../font/options.eot?61459797');

@@ -88,7 +88,7 @@ function main_register_maintenance_menu_page() {
 		'manage_options',
 		maintenance_PLUGIN_MENU_PAGE,
 		'',
-		'',
+		'dashicons-lock',
 		6
 	);
 
@@ -207,7 +207,7 @@ function main_maintenance_settings() {
 							</div>
 						</div>
 						<div class="white-box">
-							<h2>Maintenance texts</h2>
+							<h2 style="display:inline-block;">Maintenance texts</h2><a href="javascript:void(0)" id="main-reset-defaults">Reset defaults</a>
 							<p class="text-muted m-b-30 font-13">Here you can style and change your maintenance texts.</p>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Page headline</label>
@@ -496,16 +496,13 @@ function main_get_content() {
 		$subject = ( isset($_POST['your-subject']) && $_POST['your-subject'] != '' ? sanitize_text_field($_POST['your-subject']) : 'No subject' );
 		$message = 'Sender name: ' . sanitize_text_field($_POST['your-name']) . PHP_EOL . 'Sender e-mail: ' . sanitize_text_field($_POST['your-email']) . PHP_EOL . 'Sender wrote:' . PHP_EOL . sanitize_text_field($_POST['your-message']);
 
-		// add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
 		$maintenance_email = wp_mail( $main_maintenance_settings['contact-email'], $subject, $message );
-		// remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
-		add_action( 'main_maintenance_email_send', function( $maintenance_email ) {
-			if ( $maintenance_email ) {
-				return '<span class="contact-us-notice success">Your email was sent successfully!</span>';
-			} else {
-				return '<span class="contact-us-notice error">Something went wrong!</span>';
-			}
-		});
+		
+		if ( $maintenance_email ) {
+			$_GET['main-email-notice'] = '<span class="contact-us-notice success">Your email was sent successfully!</span>';
+		} else {
+			$_GET['main-email-notice'] = '<span class="contact-us-notice error">Something went wrong!</span>';
+		}
 	}
 
 	if (
@@ -536,13 +533,16 @@ function main_get_content() {
 		<script src="<?php echo $jquery_src; ?>" type="text/javascript"></script>
 		<?php do_action('main_maintenance_head'); ?>
 		<?php do_action('main_maintenance_footer'); ?>
-		<?php if ( $main_maintenance_settings['google-analytics'] == 'true' ) { ?>
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					<?php echo $main_maintenance_settings['google-analytics-code']; ?>
-				});
-			</script>
-		<?php } ?>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				<?php if ( $main_maintenance_settings['google-analytics'] == 'true' ) {
+					echo $main_maintenance_settings['google-analytics-code'];
+				} ?>
+				<?php if ( isset($_GET['contact-form']) && $_GET['contact-form'] == 'sent' ) { ?>
+					jQuery('body').addClass('contact-opened');
+				<?php } ?>
+			});
+		</script>
 		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maintenance-functionality-public.js" type="text/javascript"></script>
 		
 		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
@@ -565,8 +565,8 @@ function main_get_content() {
 			} ?>
 		</div>
 		<?php if ( $main_maintenance_settings['background-image'] != '' ) { ?>
-			<style type="text/css">#main-maintenance-bg{background: url(<?php echo $main_maintenance_settings['background-image']; ?>) no-repeat;background-size:cover;background-position:center;}</style>
-			<div id="main-maintenance-bg" class="<?php echo (isset($main_maintenance_settings['background-blur'])&&$main_maintenance_settings['background-blur'] == 'true'?'blurred':'');?>"></div>
+			<style type="text/css">#main-maintenance-bg div{background: url(<?php echo $main_maintenance_settings['background-image']; ?>) no-repeat;background-size:cover;background-position:center;}</style>
+			<div id="main-maintenance-bg" class="<?php echo (isset($main_maintenance_settings['background-blur'])&&$main_maintenance_settings['background-blur'] == 'true'?'blurred':'');?>"><div></div></div>
 		<?php } ?>
 		<?php do_action('main_maintenance_video'); ?>
 

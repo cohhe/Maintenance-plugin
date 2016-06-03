@@ -109,6 +109,18 @@ jQuery(document).ready(function($) {
 		$('#multiscroll > div > div').css('background-size', $(window).width()+'px');
 	}
 
+	if ( $('body').hasClass('contact-opened') ) {
+		if ( $('.maintenance-wrapper').hasClass('template-style5') || $('.maintenance-wrapper').hasClass('template-style4') ) {
+			$.fn.multiscroll.moveSectionDown();
+		} else {
+			$('.main-maintenance-contact-us').addClass('opened');
+			$('html,body,.maintenance-wrapper').animate({
+				scrollTop: $('.contact-us-notice').offset().top
+			});
+		}
+		
+	}
+
 });
 
 jQuery(window).load(function() {

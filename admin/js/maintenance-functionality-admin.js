@@ -195,6 +195,62 @@ jQuery(document).ready(function($) {
 		
 	});
 
+	var template_defaults = {
+		'default': {
+			'headline': 'color: #fff;font-size: 55px;line-height: 66px;font-weight: bold;',
+			'description': 'color: #fff;font-size: 18px;line-height: 32px;font-weight: 300;'
+		},
+		'style2': {
+			'headline': 'color: #fff;font-size: 55px;line-height: 66px;font-weight: bold;',
+			'description': 'color: #fff;font-size: 18px;line-height: 20px;font-weight: normal;'
+		},
+		'style3': {
+			'headline': 'color: #fff;font-size: 32px;line-height: 34px;font-weight: bold;',
+			'description': 'color: #fff;font-size: 18px;line-height: 20px;font-weight: normal;'
+		},
+		'style4': {
+			'headline': 'color: #fff;font-size: 64px;line-height: 64px;font-weight: normal;',
+			'description': 'color: #fff;font-size: 16px;line-height: 26px;font-weight: 400;'
+		},
+		'style5': {
+			'headline': 'color: #fff;font-size: 55px;line-height: 66px;font-weight: bold;',
+			'description': 'color: #fff;font-size: 18px;line-height: 26px;font-weight: 300;'
+		},
+		'style6': {
+			'headline': 'color: #fff;font-size: 64px;line-height: 64px;font-weight: bold;',
+			'description': 'color: #fff;font-size: 16px;line-height: 26px;font-weight: normal;'
+		},
+		'style7': {
+			'headline': 'color: #fff;font-size: 35px;line-height: 38px;font-weight: 300;',
+			'description': 'color: #fff;font-size: 16px;line-height: 20px;font-weight: normal;'
+		},
+		'style8': {
+			'headline': 'color: #fff;font-size: 38px;line-height: 160px;font-weight: 300;',
+			'description': 'color: #fff;'
+		},
+		'style9': {
+			'headline': 'color: #fff;font-size: 40px;line-height: 66px;font-weight: bold;',
+			'description': 'color: #fff;font-size: 18px;line-height: 22px;font-weight: normal;'
+		},
+		'style10': {
+			'headline': 'color: #fff;font-size: 100px;line-height: 100px;font-weight: 400;',
+			'description': 'color: #fff;font-size: 18px;line-height: 24px;font-weight: 300;'
+		},
+		'style11': {
+			'headline': 'color: #fff;font-size: 36px;line-height: 38px;font-weight: 300;',
+			'description': 'color: #fff;font-size: 14px;line-height: 25px;font-weight: 400;'
+		}
+	}
+
+	jQuery(document).on('click', '#main-reset-defaults', function() {
+		if ( confirm('Are you sure you want to reset to default text styles?') ) {
+			var template_styles = jQuery.makeArray( template_defaults );
+			var current_template = jQuery('.main-fake-select').attr('data-selected');
+			jQuery('#main-page-headline').attr('style', template_styles['0'][current_template]['headline']);
+			jQuery('#main-page-description').attr('style', template_styles['0'][current_template]['description']);
+		}
+	});
+
 	jQuery(document).on('click', '.main-fake-select li:not(.cant-select)', function() {
 		var selected_element = jQuery(this);
 		setTimeout(function() {
@@ -208,6 +264,15 @@ jQuery(document).ready(function($) {
 				jQuery('.form-group.second-bg').show();
 			} else {
 				jQuery('.form-group.second-bg').hide();
+			}
+			var template_styles = jQuery.makeArray( template_defaults );
+			if ( jQuery('#main-page-headline').attr('style') == '' || jQuery('#main-page-headline').hasClass('allow-change') ) {
+				jQuery('#main-page-headline').addClass('allow-change');
+				jQuery('#main-page-headline').attr('style', template_styles['0'][selected_element.attr('data-value')]['headline']);
+			}
+			if ( jQuery('#main-page-description').attr('style') == '' || jQuery('#main-page-description').hasClass('allow-change') ) {
+				jQuery('#main-page-description').addClass('allow-change');
+				jQuery('#main-page-description').attr('style', template_styles['0'][selected_element.attr('data-value')]['description']);
 			}
 		}, 100);
 	});
