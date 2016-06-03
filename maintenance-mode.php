@@ -8,13 +8,13 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://cohhe.com
+ * @link              https://cohhe.com
  * @since             1.0
- * @package           maitenance_func
+ * @package           maintenance_func
  *
  * @wordpress-plugin
  * Plugin Name:       Maintenance mode
- * Plugin URI:        http://cohhe.com/
+ * Plugin URI:        https://cohhe.com/
  * Description:       This plugin adds maintenance mode functionality to your page
  * Version:           1.0
  * Author:            Cohhe
@@ -32,36 +32,36 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-maitenance-functionality-activator.php
+ * This action is documented in includes/class-maintenance-functionality-activator.php
  */
-function maitenance_activate_maitenance_func() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-maitenance-functionality-activator.php';
-	maitenance_func_Activator::maitenance_activate();
+function maintenance_activate_maintenance_func() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-maintenance-functionality-activator.php';
+	maintenance_func_Activator::maintenance_activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-maitenance-functionality-deactivator.php
+ * This action is documented in includes/class-maintenance-functionality-deactivator.php
  */
-function maitenance_deactivate_maitenance_func() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-maitenance-functionality-deactivator.php';
-	maitenance_func_Deactivator::maitenance_deactivate();
+function maintenance_deactivate_maintenance_func() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-maintenance-functionality-deactivator.php';
+	maintenance_func_Deactivator::maintenance_deactivate();
 }
 
-register_activation_hook( __FILE__, 'maitenance_activate_maitenance_func' );
-register_deactivation_hook( __FILE__, 'maitenance_deactivate_maitenance_func' );
+register_activation_hook( __FILE__, 'maintenance_activate_maintenance_func' );
+register_deactivation_hook( __FILE__, 'maintenance_deactivate_maintenance_func' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-define('maitenance_PLUGIN', plugin_dir_path( __FILE__ ));
-define('maitenance_PLUGIN_URI', plugin_dir_url( __FILE__ ));
-define('maitenance_PLUGIN_MENU_PAGE', 'wp-maintenance');
-define('maitenance_PLUGIN_SUBMENU_PAGE', 'maintenance-mode-list');
-define('maitenance_PLUGIN_MENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maitenance_PLUGIN_MENU_PAGE);
-define('maitenance_PLUGIN_SUBMENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maitenance_PLUGIN_SUBMENU_PAGE);
-require plugin_dir_path( __FILE__ ) . 'includes/class-maitenance-functionality.php';
+define('maintenance_PLUGIN', plugin_dir_path( __FILE__ ));
+define('maintenance_PLUGIN_URI', plugin_dir_url( __FILE__ ));
+define('maintenance_PLUGIN_MENU_PAGE', 'wp-maintenance');
+define('maintenance_PLUGIN_SUBMENU_PAGE', 'maintenance-mode-list');
+define('maintenance_PLUGIN_MENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maintenance_PLUGIN_MENU_PAGE);
+define('maintenance_PLUGIN_SUBMENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maintenance_PLUGIN_SUBMENU_PAGE);
+require plugin_dir_path( __FILE__ ) . 'includes/class-maintenance-functionality.php';
 
 
 /**
@@ -73,31 +73,31 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-maitenance-functionality.p
  *
  * @since    1.0.0
  */
-function run_maitenance_func() {
+function run_maintenance_func() {
 
-	$plugin = new maitenance_func();
-	$plugin->maitenance_run();
+	$plugin = new maintenance_func();
+	$plugin->maintenance_run();
 
 }
-run_maitenance_func();
+run_maintenance_func();
 
 function main_register_maintenance_menu_page() {
 	add_menu_page(
 		__( 'Maintenance', 'maintenance-mode' ),
 		__( 'Maintenance', 'maintenance-mode' ),
 		'manage_options',
-		maitenance_PLUGIN_MENU_PAGE,
+		maintenance_PLUGIN_MENU_PAGE,
 		'',
 		'',
 		6
 	);
 
 	add_submenu_page(
-		maitenance_PLUGIN_MENU_PAGE,
+		maintenance_PLUGIN_MENU_PAGE,
 		__('Add New', 'maintenance-mode'),
 		__('Add New', 'maintenance-mode'),
 		'manage_options',
-		maitenance_PLUGIN_MENU_PAGE,
+		maintenance_PLUGIN_MENU_PAGE,
 		'main_maintenance_settings'
 	);
 }
@@ -106,7 +106,7 @@ add_action( 'admin_menu', 'main_register_maintenance_menu_page' );
 function main_get_settings() {
 	$settings = array(
 		'maintenance-status' => 'false',
-		'background-image' => plugin_dir_url( __FILE__ ).'public/images/default-bg.png',
+		'background-image' => plugin_dir_url( __FILE__ ).'public/images/default-bg.jpg',
 		'background-blur' => 'false',
 		'maintenance-logo' => '',
 		'maintenance-retina' => 'false',
@@ -379,6 +379,12 @@ function main_maintenance_settings() {
 									<input type="text" id="main-page-title" class="form-control" value="<?php echo (isset($main_maintenance_settings['page-title'])?$main_maintenance_settings['page-title']:''); ?>">
 								</div>
 							</div>
+							<div class="form-group clearfix">
+								<label for="pm-image-to-url" class="control-label col-md-3">Custom CSS</label>
+								<div class="input-wrapper col-md-9">
+									<textarea id="main-maintenance-css" class="form-control"><?php echo (isset($main_maintenance_settings['maintenance-css']) && $main_maintenance_settings['maintenance-css'] != '' ? $main_maintenance_settings['maintenance-css'] : ''); ?></textarea>
+								</div>
+							</div>
 							<?php do_action('main_maintenance_looks_bottom'); ?>
 							<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
 								<div class="form-group clearfix">
@@ -483,6 +489,25 @@ function main_get_content() {
 	$wp_scripts = new WP_Scripts();
 	$jquery_src = ( !empty($wp_scripts->registered['jquery-core']) ? home_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' );
 
+	if ( isset($_GET['contact-form']) && $_GET['contact-form'] == 'sent' ) {
+		// SETTINGS
+		$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+
+		$subject = ( isset($_POST['your-subject']) && $_POST['your-subject'] != '' ? sanitize_text_field($_POST['your-subject']) : 'No subject' );
+		$message = 'Sender name: ' . sanitize_text_field($_POST['your-name']) . PHP_EOL . 'Sender e-mail: ' . sanitize_text_field($_POST['your-email']) . PHP_EOL . 'Sender wrote:' . PHP_EOL . sanitize_text_field($_POST['your-message']);
+
+		// add_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+		$maintenance_email = wp_mail( $main_maintenance_settings['contact-email'], $subject, $message );
+		// remove_filter( 'wp_mail_content_type', 'wpdocs_set_html_mail_content_type' );
+		add_action( 'main_maintenance_email_send', function( $maintenance_email ) {
+			if ( $maintenance_email ) {
+				return '<span class="contact-us-notice success">Your email was sent successfully!</span>';
+			} else {
+				return '<span class="contact-us-notice error">Something went wrong!</span>';
+			}
+		});
+	}
+
 	if (
 		$main_maintenance_settings['maintenance-status'] == 'true' &&
 		!strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
@@ -506,56 +531,46 @@ function main_get_content() {
 		?>
 
 		
-		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maitenance-functionality-public.css'; ?>" type="text/css" media="all">
+		<link rel="stylesheet" id="maintenance-css" href="<?php echo plugin_dir_url( __FILE__ ).'/public/css/maintenance-functionality-public.css'; ?>" type="text/css" media="all">
 		<link href='https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Montserrat:300,400,700|Open+Sans:300,400,700|Roboto:300,400,700|Lato:300,400,700|Aldrich:400|Raleway:300:400:600|Iceberg:400' rel='stylesheet' type='text/css'>
-		<?php do_action('main_maintenance_head'); ?>
-		<?php
-		?>
 		<script src="<?php echo $jquery_src; ?>" type="text/javascript"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				<?php if ( $main_maintenance_settings['background-blur'] == 'true' ) { ?>
-					$(window).on("backstretch.after", function (e, instance, index) {
-						jQuery('.backstretch').addClass('blurred');
-					});
-				<?php } ?>
-				<?php if ( $main_maintenance_settings['google-analytics'] == 'true' ) {
-					echo $main_maintenance_settings['google-analytics-code'];
-				} ?>
-			});
-		</script>
-		<?php if ( $main_maintenance_settings['background-image'] != '' ) { ?>
-			<style type="text/css">body{background: url(<?php echo $main_maintenance_settings['background-image']; ?>) no-repeat;background-size:cover;background-position:center;}</style>
-		<?php } ?>
+		<?php do_action('main_maintenance_head'); ?>
 		<?php do_action('main_maintenance_footer'); ?>
+		<?php if ( $main_maintenance_settings['google-analytics'] == 'true' ) { ?>
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					<?php echo $main_maintenance_settings['google-analytics-code']; ?>
+				});
+			</script>
+		<?php } ?>
+		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maintenance-functionality-public.js" type="text/javascript"></script>
+		
 		<script type="text/preloaded" id="main-template-data"><?php main_get_template( $main_template ); ?></script>
-		<script src="<?php echo plugin_dir_url( __FILE__ ).'/public/js' ?>/maitenance-functionality-public.js" type="text/javascript"></script>
 		<title><?php echo $main_maintenance_settings['page-title']; ?></title>
+		<?php if ( isset($main_maintenance_settings['maintenance-css']) && $main_maintenance_settings['maintenance-css'] != '' ) { ?>
+			<style type="text/css"><?php echo $main_maintenance_settings['maintenance-css']; ?></style>
+		<?php } ?>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
 		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?>">
 			<?php if ( isset($main_maintenance_settings['animation']) && $main_maintenance_settings['animation'] != 'none' ) { ?>
 				<canvas id="main-animation-canvas"></canvas>
 			<?php } ?>
 			<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
-			<?php if ( isset($main_maintenance_settings['maintenance-login']) && $main_maintenance_settings['maintenance-login'] == 'true' && !is_user_logged_in() ) { ?>
-			<div class="main-maintenance-login">
-				<div>
-					<h1><?php _e('Login', 'vh'); ?></h1>
-					<span class="main-maintenance-login-open"></span>
-					<?php wp_login_form( array('label_username'=>'Username', 'label_password'=>'Password') ); ?>
-					<a href="<?php echo wp_lostpassword_url(); ?>" class="forgot_password"><?php _e( 'Forgot password', 'vh' ); ?></a>
-				</div>
-			</div>
-			<?php } ?>
+			<?php if ( isset($main_maintenance_settings['maintenance-login']) && $main_maintenance_settings['maintenance-login'] == 'true' && !is_user_logged_in() ) {
+				do_action('main_maintenance_login_form');
+			} ?>
 			<?php if ( function_exists('run_maintenancepro_func') ) {
 				// && isset($main_maintenance_settings['template']) && $main_maintenance_settings['template'] != 'style5'
 				do_action('main_maintenance_contact_us');
 			} ?>
 		</div>
+		<?php if ( $main_maintenance_settings['background-image'] != '' ) { ?>
+			<style type="text/css">#main-maintenance-bg{background: url(<?php echo $main_maintenance_settings['background-image']; ?>) no-repeat;background-size:cover;background-position:center;}</style>
+			<div id="main-maintenance-bg" class="<?php echo (isset($main_maintenance_settings['background-blur'])&&$main_maintenance_settings['background-blur'] == 'true'?'blurred':'');?>"></div>
+		<?php } ?>
 		<?php do_action('main_maintenance_video'); ?>
 
 		<?php
-		
 		ob_flush();
 		?>
 		
@@ -693,7 +708,7 @@ function sample_admin_notice__success() {
 	?>
 	<div class="main-maintenance-notice">
 		<span class="main-notice-left">
-			<img src="<?php echo maitenance_PLUGIN_URI; ?>admin/images/logo-square.png" alt="">
+			<img src="<?php echo maintenance_PLUGIN_URI; ?>admin/images/logo-square.png" alt="">
 		</span>
 		<div class="main-notice-center">
 			<p>Hi there, <?php echo $user->data->display_name; ?>, we noticed that you've been using our Maintenance mode plugin for a while now.</p>
@@ -806,6 +821,16 @@ function main_prepare_html( $template, $settings ) {
 	$output = str_replace('{main_maintenance_countdown}', main_get_countdown( $settings ), $output);
 	$output = str_replace('{main_maintenance_social}', main_get_social( $settings ), $output);
 	$output = str_replace('{main_maintenance_mailchimp}', main_get_mailchimp( $settings ), $output);
+	if ( function_exists('maintenancepro_contact_left') ) {
+		$output = str_replace('{main_maintenance_contact_left}', maintenancepro_contact_left( $settings ), $output);
+	} else {
+		$output = str_replace('{main_maintenance_contact_left}', '', $output);
+	}
+	if ( function_exists('maintenancepro_contact_right') ) {
+		$output = str_replace('{main_maintenance_contact_right}', maintenancepro_contact_right( $settings ), $output);
+	} else {
+		$output = str_replace('{main_maintenance_contact_right}', '', $output);
+	}
 	
 	echo $output;
 }

@@ -9,8 +9,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/includes
+ * @package    maintenance_func
+ * @subpackage maintenance_func/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    maitenance_func
- * @subpackage maitenance_func/includes
+ * @package    maintenance_func
+ * @subpackage maintenance_func/includes
  * @author     Your Name <email@example.com>
  */
-class maitenance_func_i18n {
+class maintenance_func_i18n {
 
 	/**
 	 * The domain specified for this plugin.
@@ -40,7 +40,7 @@ class maitenance_func_i18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function maitenance_load_plugin_textdomain() {
+	public function maintenance_load_plugin_textdomain() {
 
 		load_plugin_textdomain(
 			$this->domain,
@@ -56,7 +56,7 @@ class maitenance_func_i18n {
 	 * @since    1.0.0
 	 * @param    string    $domain    The domain that represents the locale of this plugin.
 	 */
-	public function maitenance_set_domain( $domain ) {
+	public function maintenance_set_domain( $domain ) {
 		$this->domain = $domain;
 	}
 

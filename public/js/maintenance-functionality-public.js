@@ -80,6 +80,35 @@ jQuery(document).ready(function($) {
 		jQuery(this).parent().toggleClass('opened');
 	});
 
+	jQuery(document).on('click', '.maintenance-form button', function(e) {
+		e.preventDefault();
+		var invalid = 0;
+		jQuery('.maintenance-form .maintenance-form-control').removeClass('invalid');
+
+		if ( jQuery('.maintenance-form input[name="your-name"]').val() == '' ) {
+			jQuery('.maintenance-form input[name="your-name"]').addClass('invalid');
+			invalid++;
+		}
+		if ( jQuery('.maintenance-form input[name="your-email"]').val() == '' ) {
+			jQuery('.maintenance-form input[name="your-email"]').addClass('invalid');
+			invalid++;
+		}
+		if ( jQuery('.maintenance-form textarea').val() == '' ) {
+			jQuery('.maintenance-form textarea').addClass('invalid');
+			invalid++;
+		}
+
+		if ( invalid == 0 ) {
+			jQuery('.maintenance-form').submit();
+		}
+	});
+
+	if ( jQuery('#multiscroll').length ) {
+		jQuery('#multiscroll').show();
+		jQuery('#multiscroll').multiscroll();
+		$('#multiscroll > div > div').css('background-size', $(window).width()+'px');
+	}
+
 });
 
 jQuery(window).load(function() {

@@ -521,6 +521,10 @@ p {
 	cursor: no-drop;
 }
 
+.form-group.second-bg {
+	display: none;
+}
+
 @font-face {
   font-family: 'options2';
   src: url('../font/options.eot?61459797');

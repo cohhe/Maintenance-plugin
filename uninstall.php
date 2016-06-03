@@ -22,7 +22,7 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    maitenance_func
+ * @package    maintenance_func
  */
 
 // If uninstall not called from WordPress, then exit.

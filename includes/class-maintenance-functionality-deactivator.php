@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/includes
+ * @package    maintenance_func
+ * @subpackage maintenance_func/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    maitenance_func
- * @subpackage maitenance_func/includes
+ * @package    maintenance_func
+ * @subpackage maintenance_func/includes
  * @author     Your Name <email@example.com>
  */
-class maitenance_func_Deactivator {
+class maintenance_func_Deactivator {
 
 	/**
 	 * Short Description. (use period)
@@ -29,7 +29,7 @@ class maitenance_func_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function maitenance_deactivate() {
+	public static function maintenance_deactivate() {
 
 	}
 

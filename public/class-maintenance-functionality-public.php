@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/public
+ * @package    maintenance_func
+ * @subpackage maintenance_func/public
  */
 
 /**
@@ -16,20 +16,20 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/public
+ * @package    maintenance_func
+ * @subpackage maintenance_func/public
  * @author     Your Name <email@example.com>
  */
-class maitenance_func_Public {
+class maintenance_func_Public {
 
 	/**
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $maitenance_func    The ID of this plugin.
+	 * @var      string    $maintenance_func    The ID of this plugin.
 	 */
-	private $maitenance_func;
+	private $maintenance_func;
 
 	/**
 	 * The version of this plugin.
@@ -44,12 +44,12 @@ class maitenance_func_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $maitenance_func       The name of the plugin.
+	 * @param      string    $maintenance_func       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $maitenance_func, $version ) {
+	public function __construct( $maintenance_func, $version ) {
 
-		$this->maitenance_func = $maitenance_func;
+		$this->maintenance_func = $maintenance_func;
 		$this->version = $version;
 
 	}
@@ -65,15 +65,15 @@ class maitenance_func_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in maitenance_func_Loader as all of the hooks are defined
+		 * defined in maintenance_func_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The maitenance_func_Loader will then create the relationship
+		 * The maintenance_func_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->maitenance_func, plugin_dir_url( __FILE__ ) . 'css/maitenance-functionality-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->maintenance_func, plugin_dir_url( __FILE__ ) . 'css/maintenance-functionality-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class maitenance_func_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in maitenance_func_Loader as all of the hooks are defined
+		 * defined in maintenance_func_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The maitenance_func_Loader will then create the relationship
+		 * The maintenance_func_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->maitenance_func, plugin_dir_url( __FILE__ ) . 'js/maitenance-functionality-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->maintenance_func, plugin_dir_url( __FILE__ ) . 'js/maintenance-functionality-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

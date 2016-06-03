@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/includes
+ * @package    maintenance_func
+ * @subpackage maintenance_func/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/includes
+ * @package    maintenance_func
+ * @subpackage maintenance_func/includes
  * @author     Your Name <email@example.com>
  */
-class maitenance_func_Loader {
+class maintenance_func_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
@@ -63,8 +63,8 @@ class maitenance_func_Loader {
 	 * @param      int      Optional    $priority         The priority at which the function should be fired.
 	 * @param      int      Optional    $accepted_args    The number of arguments that should be passed to the $callback.
 	 */
-	public function maitenance_add_action( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
-		$this->actions = $this->maitenance_add( $this->actions, $hook, $component, $callback, $priority, $accepted_args );
+	public function maintenance_add_action( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
+		$this->actions = $this->maintenance_add( $this->actions, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
 	/**
@@ -77,8 +77,8 @@ class maitenance_func_Loader {
 	 * @param      int      Optional    $priority         The priority at which the function should be fired.
 	 * @param      int      Optional    $accepted_args    The number of arguments that should be passed to the $callback.
 	 */
-	public function maitenance_add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
-		$this->filters = $this->maitenance_add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
+	public function maintenance_add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
+		$this->filters = $this->maintenance_add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
 	/**
@@ -95,7 +95,7 @@ class maitenance_func_Loader {
 	 * @param      int      Optional    $accepted_args    The number of arguments that should be passed to the $callback.
 	 * @return   type                                   The collection of actions and filters registered with WordPress.
 	 */
-	private function maitenance_add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
+	private function maintenance_add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
 
 		$hooks[] = array(
 			'hook'          => $hook,
@@ -114,7 +114,7 @@ class maitenance_func_Loader {
 	 *
 	 * @since    1.0.0
 	 */
-	public function maitenance_run() {
+	public function maintenance_run() {
 
 		foreach ( $this->filters as $hook ) {
 			add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );

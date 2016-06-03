@@ -8,8 +8,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    maitenance_func
- * @subpackage maitenance_func/public/partials
+ * @package    maintenance_func
+ * @subpackage maintenance_func/public/partials
  */
 ?>
 
