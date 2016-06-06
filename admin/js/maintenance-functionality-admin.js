@@ -246,10 +246,25 @@ jQuery(document).ready(function($) {
 		if ( confirm('Are you sure you want to reset to default text styles?') ) {
 			var template_styles = jQuery.makeArray( template_defaults );
 			var current_template = jQuery('.main-fake-select').attr('data-selected');
-			jQuery('#main-page-headline').attr('style', template_styles['0'][current_template]['headline']);
-			jQuery('#main-page-description').attr('style', template_styles['0'][current_template]['description']);
+			jQuery('#main-page-headline').attr('style', template_styles['0'][current_template]['headline']).addClass('allow-change');
+			jQuery('#main-page-description').attr('style', template_styles['0'][current_template]['description']).addClass('allow-change');
+			jQuery('#main-reset-defaults').hide();
 		}
 	});
+
+	if ( jQuery('#main-page-headline').attr('style') != '' || jQuery('#main-page-description').attr('style') != '' ) {
+		var template_styles = jQuery.makeArray( template_defaults );
+		var current_template = jQuery('.main-fake-select').attr('data-selected');
+		if ( jQuery('#main-page-headline').attr('style') == template_styles['0'][current_template]['headline'] ) {
+			jQuery('#main-page-headline').addClass('allow-change');
+		}
+		if ( jQuery('#main-page-description').attr('style') == template_styles['0'][current_template]['description'] ) {
+			jQuery('#main-page-description').addClass('allow-change');
+		}
+		if ( jQuery('#main-page-headline').attr('style') == template_styles['0'][current_template]['headline'] && jQuery('#main-page-description').attr('style') == template_styles['0'][current_template]['description'] ) {
+			jQuery('#main-reset-defaults').hide();
+		}
+	}
 
 	jQuery(document).on('click', '.main-fake-select li:not(.cant-select)', function() {
 		var selected_element = jQuery(this);

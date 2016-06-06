@@ -206,7 +206,7 @@ function main_maintenance_settings() {
 								</div>
 							</div>
 						</div>
-						<div class="white-box">
+						<div class="white-box <?php echo ($main_maintenance_settings['page-headline-style']==''&&$main_maintenance_settings['page-description-style']==''?'reset-default-hidden':''); ?>">
 							<h2 style="display:inline-block;">Maintenance texts</h2><a href="javascript:void(0)" id="main-reset-defaults">Reset defaults</a>
 							<p class="text-muted m-b-30 font-13">Here you can style and change your maintenance texts.</p>
 							<div class="form-group clearfix">

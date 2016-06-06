@@ -534,6 +534,10 @@ p {
 	padding: 5px;
 }
 
+.white-box.reset-default-hidden #main-reset-defaults {
+	display: none
+}
+
 @font-face {
   font-family: 'options2';
   src: url('../font/options.eot?61459797');
