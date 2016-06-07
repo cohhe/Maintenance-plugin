@@ -252,7 +252,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	if ( jQuery('#main-page-headline').attr('style') != '' || jQuery('#main-page-description').attr('style') != '' ) {
+
+	if ( ( jQuery('#main-page-headline').length && jQuery('#main-page-headline').attr('style') != '' ) || ( jQuery('#main-page-description').length && jQuery('#main-page-description').attr('style') != '' ) ) {
 		var template_styles = jQuery.makeArray( template_defaults );
 		var current_template = jQuery('.main-fake-select').attr('data-selected');
 		if ( jQuery('#main-page-headline').attr('style') == template_styles['0'][current_template]['headline'] ) {
