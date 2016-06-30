@@ -560,7 +560,7 @@ p {
 }
 */
  
- [class^="icon-"]:before, [class*=" icon-"]:before {
+ [class^="pmicon-"]:before, [class*=" pmicon-"]:before {
   font-family: "options2";
   font-style: normal;
   font-weight: normal;
@@ -595,4 +595,4 @@ p {
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-lock:before { content: '\e800'; } /* '' */
+.mmicon-lock:before { content: '\e800'; } /* '' */

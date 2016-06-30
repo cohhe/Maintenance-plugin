@@ -57,7 +57,7 @@ class maintenance_func_Activator {
 		dbDelta( $template_sql );
 
 		// Default template
-		$default_html = '{main_maintenance_logo}<div class=\"maintenance-inner\"><div class=\"maintenance-title\" data-content=\"title\"></div>{main_maintenance_countdown}<p class=\"maintenance-description\" data-content=\"description\"></p>{main_maintenance_social}{main_maintenance_mailchimp}</div><div class=\"main-maintenance-contact-wrapper\"><div class=\"main-maintenance-contact-us\"><span class=\"contact-us-open icon-paper-plane\"></span><div class=\"contact-us-inner\"><div class=\"contact-us-left\">{main_maintenance_contact_left}</div><div class=\"contact-us-right\">{main_maintenance_contact_right}</div><div class=\"clearfix\"></div></div></div></div>';
+		$default_html = '{main_maintenance_logo}<div class=\"maintenance-inner\"><div class=\"maintenance-title\" data-content=\"title\"></div>{main_maintenance_countdown}<p class=\"maintenance-description\" data-content=\"description\"></p>{main_maintenance_social}{main_maintenance_mailchimp}</div><div class=\"main-maintenance-contact-wrapper\"><div class=\"main-maintenance-contact-us\"><span class=\"contact-us-open mmicon-paper-plane\"></span><div class=\"contact-us-inner\"><div class=\"contact-us-left\">{main_maintenance_contact_left}</div><div class=\"contact-us-right\">{main_maintenance_contact_right}</div><div class=\"clearfix\"></div></div></div></div>';
 		if ( !$wpdb->query('SELECT * FROM ' . $template_table . ' WHERE template="default"') ) {
 			$wpdb->query('INSERT INTO ' . $template_table . ' (template,template_html) VALUES ("default","'.$default_html.'")');
 		} else {

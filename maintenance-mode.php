@@ -775,25 +775,25 @@ function main_get_social( $main_maintenance_settings ) {
 	$output .= '
 	<div class="maintenance-buttons">';
 		if ( $main_maintenance_settings['social-github'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-github'] . '" class="social-icons icon-github" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-github'] . '" class="social-icons mmicon-github" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 		if ( $main_maintenance_settings['social-dribbble'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-dribbble'] . '" class="social-icons icon-dribbble" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-dribbble'] . '" class="social-icons mmicon-dribbble" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 		if ( $main_maintenance_settings['social-twitter'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-twitter'] . '" class="social-icons icon-twitter" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-twitter'] . '" class="social-icons mmicon-twitter" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 		if ( $main_maintenance_settings['social-facebook'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-facebook'] . '" class="social-icons icon-facebook" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-facebook'] . '" class="social-icons mmicon-facebook" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 		if ( $main_maintenance_settings['social-pinterest'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-pinterest'] . '" class="social-icons icon-pinterest-circled" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-pinterest'] . '" class="social-icons mmicon-pinterest-circled" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 		if ( $main_maintenance_settings['social-gplus'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-gplus'] . '" class="social-icons icon-gplus" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-gplus'] . '" class="social-icons mmicon-gplus" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 		if ( $main_maintenance_settings['social-linkedin'] ) {
-			$output .= '<a href="' . $main_maintenance_settings['social-linkedin'] . '" class="social-icons icon-linkedin-squared" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
+			$output .= '<a href="' . $main_maintenance_settings['social-linkedin'] . '" class="social-icons mmicon-linkedin-squared" ' . ($main_maintenance_settings['social-target']=='new'?'target="_blank"':'') . '></a>';
 		}
 	$output .= '</div>';
 	}
