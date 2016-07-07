@@ -504,7 +504,7 @@ p {
 }
 
 .main-grayed:hover:before {
-	content: 'This feature is only available for the Popup Manager Pro version!';
+	content: 'This feature is only available for the Maintenance Pro version!';
 	position: absolute;
 	z-index: 11;
 	background: rgba(0,0,0,0.6);
@@ -514,6 +514,7 @@ p {
 	border: 1px solid #ccc;
 	margin-top: 5px;
 	margin-left: 35px;
+	cursor: pointer;
 }
 
 .main-fake-select li.cant-select {

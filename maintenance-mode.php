@@ -16,7 +16,7 @@
  * Plugin Name:       Maintenance mode
  * Plugin URI:        https://cohhe.com/
  * Description:       This plugin adds maintenance mode functionality to your page
- * Version:           1.0
+ * Version:           1.1
  * Author:            Cohhe
  * Author URI:        https://cohhe.com/
  * License:           GPL-2.0+
