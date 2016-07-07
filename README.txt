@@ -37,6 +37,8 @@ Maintenance mode is the best plugin for coming soon style messages. You can stil
 > * Bypass settings
 > * MailChimp newsletter form
 > * Countdown clock
+> * Contact form
+> * Multiple page layout
 
 == Installation ==
 
