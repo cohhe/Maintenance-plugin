@@ -484,15 +484,61 @@ function main_get_content() {
 	// SETTINGS
 	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
 	$main_template = (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default');
+
+	$demo = false;
+	$current_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'default') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'default';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/default-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style2') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style2';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style2-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style3') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style3';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style3-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style4') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style4';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style4-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style5') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style5';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style5-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style6') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style6';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style6-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style7') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style7';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style7-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style8') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style8';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style8-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style9') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style9';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style9-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style10') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style10';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style10-bg.jpg';
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style11') !== false ) {
+		$demo = true;
+		$main_maintenance_settings['template'] = $main_template = 'style11';
+		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style11-bg.jpg';
+	}
+
 	$template = $wpdb->get_results('SELECT template_html FROM '.$wpdb->prefix.'maintenance_plugin_templates WHERE template="' . $main_template . '"');
 
 	$wp_scripts = new WP_Scripts();
 	$jquery_src = ( !empty($wp_scripts->registered['jquery-core']) ? home_url($wp_scripts->registered['jquery-core']->src) : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' );
 
 	if ( isset($_GET['contact-form']) && $_GET['contact-form'] == 'sent' ) {
-		// SETTINGS
-		$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
-
 		$subject = ( isset($_POST['your-subject']) && $_POST['your-subject'] != '' ? sanitize_text_field($_POST['your-subject']) : 'No subject' );
 		$message = 'Sender name: ' . sanitize_text_field($_POST['your-name']) . PHP_EOL . 'Sender e-mail: ' . sanitize_text_field($_POST['your-email']) . PHP_EOL . 'Sender wrote:' . PHP_EOL . sanitize_text_field($_POST['your-message']);
 
@@ -506,16 +552,18 @@ function main_get_content() {
 	}
 
 	if (
-		$main_maintenance_settings['maintenance-status'] == 'true' &&
-		!strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
-		!strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
-		!strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
-		!strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&
-		!strstr($_SERVER['PHP_SELF'], 'upgrade.php') &&
-		!strstr($_SERVER['PHP_SELF'], '/plugins/') &&
-		!strstr($_SERVER['PHP_SELF'], '/xmlrpc.php') &&
-		!main_check_user_role() &&
-		!main_check_exclude()
+		(
+			$main_maintenance_settings['maintenance-status'] == 'true' &&
+			!strstr($_SERVER['PHP_SELF'], 'wp-cron.php') &&
+			!strstr($_SERVER['PHP_SELF'], 'wp-login.php') &&
+			!strstr($_SERVER['PHP_SELF'], 'wp-admin/') &&
+			!strstr($_SERVER['PHP_SELF'], 'async-upload.php') &&
+			!strstr($_SERVER['PHP_SELF'], 'upgrade.php') &&
+			!strstr($_SERVER['PHP_SELF'], '/plugins/') &&
+			!strstr($_SERVER['PHP_SELF'], '/xmlrpc.php') &&
+			!main_check_user_role() &&
+			!main_check_exclude()
+		) || $demo
 	) {
 		// HEADER STUFF
 		$protocol = !empty($_SERVER['SERVER_PROTOCOL']) && in_array($_SERVER['SERVER_PROTOCOL'], array('HTTP/1.1', 'HTTP/1.0')) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
