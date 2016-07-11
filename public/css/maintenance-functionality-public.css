@@ -323,6 +323,10 @@ body {
 	height: 100%;
 }
 
+.maintenance-wrapper.template-default .maintenance-logo-wrapper {
+	margin-top: 20px;
+}
+
 /* Responsiveness */
 
 @media (max-width: 480px) {

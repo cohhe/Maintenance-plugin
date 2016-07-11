@@ -487,49 +487,47 @@ function main_get_content() {
 
 	$demo = false;
 	$current_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-	// strpos($current_link, '.cohhe.') !== false &&
-	// 		$main_maintenance_settings['second-background-image'] = 'http://localhost/cerium/wp-content/uploads/2016/05/mt-sample-background.jpg';
-	if (  strpos($current_link, 'default') !== false ) {
+	if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'default') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'default';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/default-bg.jpg';
-	} else if (  strpos($current_link, 'style2') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style2') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style2';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style2-bg.jpg';
-	} else if (  strpos($current_link, 'style3') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style3') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style3';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style3-bg.jpg';
-	} else if (  strpos($current_link, 'style4') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style4') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style4';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style4-bg.jpg';
-	} else if (  strpos($current_link, 'style5') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style5') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style5';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style5-bg.jpg';
-	} else if (  strpos($current_link, 'style6') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style6') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style6';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style6-bg.jpg';
-	} else if (  strpos($current_link, 'style7') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style7') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style7';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style7-bg.jpg';
-	} else if (  strpos($current_link, 'style8') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style8') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style8';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style8-bg.jpg';
-	} else if (  strpos($current_link, 'style9') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style9') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style9';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style9-bg.jpg';
-	} else if (  strpos($current_link, 'style10') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style10') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style10';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style10-bg.jpg';
-	} else if (  strpos($current_link, 'style11') !== false ) {
+	} else if ( strpos($current_link, '.cohhe.') !== false && strpos($current_link, 'style11') !== false ) {
 		$demo = true;
 		$main_maintenance_settings['template'] = $main_template = 'style11';
 		$main_maintenance_settings['background-image'] = maintenance_PLUGIN_URI . '/public/images/style11-bg.jpg';
