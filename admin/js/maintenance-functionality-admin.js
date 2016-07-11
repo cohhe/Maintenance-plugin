@@ -33,6 +33,11 @@
 
 jQuery(document).ready(function($) {
 
+	// Redirect user to pro version website
+	jQuery(document).on('click', '.form-group.main-grayed', function() {
+		window.location.href = "https://cohhe.com/project-view/maintenance-mode-pro/";
+	});
+
 	jQuery(document).on('click', '.main-maintenance-checkbox:not(.disabled)', function() {
 		jQuery(this).toggleClass('active')
 		if ( jQuery(this).find('input').is(':checked') ) {
