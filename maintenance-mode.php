@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Maintenance mode
  * Plugin URI:        https://cohhe.com/
- * Description:       This plugin adds maintenance mode functionality to your page
+ * Description:       This plugin adds maintenance mode functionality to your website
  * Version:           1.1
  * Author:            Cohhe
  * Author URI:        https://cohhe.com/
