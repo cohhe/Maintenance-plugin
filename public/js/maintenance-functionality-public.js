@@ -98,14 +98,20 @@ jQuery(document).ready(function($) {
 			invalid++;
 		}
 
-		if ( invalid == 0 ) {
-			jQuery('.maintenance-form').submit();
+		if ( jQuery('.maintenance-wrapper').hasClass('recaptcha') ) {
+			jQuery.post( "https://www.google.com/recaptcha/api/siteverify", { secret: '6LdLQw8TAAAAAJ6igPPy9Q3VwSrP84xvSnzD06cb', response: jQuery('#mm-contact-form-recaptcha #g-recaptcha-response').val() }, function( data ) {
+				console.log(data);
+			});
+		} else {
+			if ( invalid == 0 ) { jQuery('.maintenance-form').submit(); }
 		}
 	});
 
 	if ( jQuery('#multiscroll').length ) {
 		jQuery('#multiscroll').show();
-		jQuery('#multiscroll').multiscroll();
+		jQuery('#multiscroll').multiscroll({
+			navigation: true
+		});
 		$('#multiscroll > div > div').css('background-size', $(window).width()+'px');
 	}
 

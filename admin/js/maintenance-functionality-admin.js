@@ -151,11 +151,17 @@ jQuery(document).ready(function($) {
 		if ( jQuery('#maintenance-template').length ) {
 			main_settings += '"template":"'+jQuery('.main-fake-select').attr('data-selected')+'",';
 		}
+		// Countdown translate
 		if ( jQuery('#main-countdown-hours').length ) {
 			main_settings += '"countdown-hours":"'+jQuery('#main-countdown-hours').val()+'",';
 			main_settings += '"countdown-minutes":"'+jQuery('#main-countdown-minutes').val()+'",';
 			main_settings += '"countdown-seconds":"'+jQuery('#main-countdown-seconds').val()+'",';
 			main_settings += '"countdown-days":"'+jQuery('#main-countdown-days').val()+'",';
+		}
+		// reCAPTCHA
+		if ( jQuery('#main-recaptcha-key').length ) {
+			main_settings += '"recaptcha-key":"'+jQuery('#main-recaptcha-key').val()+'",';
+			main_settings += '"recaptcha-secret":"'+jQuery('#main-recaptcha-secret').val()+'",';
 		}
 		// CSS
 		if ( jQuery('#main-maintenance-css').length ) {

@@ -81,7 +81,9 @@ p {
 .main-maintenance-wrapper .btn-primary {
 	background: #6164c1;
 	border: 1px solid #6164c1;
+	color: #fff;
 	text-decoration: none;
+	display: inline-block;
 }
 .btn:hover {
 	opacity: 0.8;

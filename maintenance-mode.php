@@ -599,7 +599,7 @@ function main_get_content() {
 			<style type="text/css"><?php echo $main_maintenance_settings['maintenance-css']; ?></style>
 		<?php } ?>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
-		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?>">
+		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?> <?php echo ( ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) )?'recaptcha':'' ) ?>">
 			<?php if ( isset($main_maintenance_settings['animation']) && $main_maintenance_settings['animation'] != 'none' ) { ?>
 				<canvas id="main-animation-canvas"></canvas>
 			<?php } ?>

@@ -59,7 +59,7 @@ class maintenance_func_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles( $hook ) {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -72,6 +72,10 @@ class maintenance_func_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+
+		if ( $hook != 'toplevel_page_wp-maintenance' ) {
+			return;
+		}
 
 		wp_enqueue_style( $this->maintenance_func, plugin_dir_url( __FILE__ ) . 'css/maintenance-functionality-admin.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'main-grid', plugin_dir_url( __FILE__ ) . 'css/grid.css', array(), $this->version, 'all' );
@@ -83,7 +87,7 @@ class maintenance_func_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts( $hook ) {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -96,6 +100,10 @@ class maintenance_func_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+
+		if ( $hook != 'toplevel_page_wp-maintenance' ) {
+			return;
+		}
 
 		wp_enqueue_media();
 		wp_enqueue_script( $this->maintenance_func, plugin_dir_url( __FILE__ ) . 'js/maintenance-functionality-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, false );	
