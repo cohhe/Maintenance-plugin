@@ -151,6 +151,12 @@ jQuery(document).ready(function($) {
 		if ( jQuery('#maintenance-template').length ) {
 			main_settings += '"template":"'+jQuery('.main-fake-select').attr('data-selected')+'",';
 		}
+		if ( jQuery('#main-countdown-hours').length ) {
+			main_settings += '"countdown-hours":"'+jQuery('#main-countdown-hours').val()+'",';
+			main_settings += '"countdown-minutes":"'+jQuery('#main-countdown-minutes').val()+'",';
+			main_settings += '"countdown-seconds":"'+jQuery('#main-countdown-seconds').val()+'",';
+			main_settings += '"countdown-days":"'+jQuery('#main-countdown-days').val()+'",';
+		}
 		// CSS
 		if ( jQuery('#main-maintenance-css').length ) {
 			main_settings += '"maintenance-css":"'+jQuery('#main-maintenance-css').val().replace(/"/g, "'")+'",';
@@ -281,7 +287,7 @@ jQuery(document).ready(function($) {
 			selected_element.addClass('selected');
 			selected_element.parent().parent().parent().find('#maintenance-template').removeClass('opened');
 			jQuery('#main-background-image').attr('value', maintenance_main.img_folder + selected_element.attr('data-value') + '-bg.jpg' );
-			if ( selected_element.attr('data-value') == 'style5' ) {
+			if ( selected_element.attr('data-value') == 'style5' || selected_element.attr('data-value') == 'style4' ) {
 				jQuery('.form-group.second-bg').show();
 			} else {
 				jQuery('.form-group.second-bg').hide();
@@ -303,7 +309,7 @@ jQuery(document).ready(function($) {
 		jQuery(this).parent().parent().parent().find('#maintenance-template').css('background', 'url(' + jQuery(this).attr('data-image') + ') no-repeat #fff');
 	});
 
-	if ( jQuery('.main-fake-select').attr('data-selected') == 'style5' ) {
+	if ( jQuery('.main-fake-select').attr('data-selected') == 'style5' || jQuery('.main-fake-select').attr('data-selected') == 'style4' ) {
 		jQuery('.form-group.second-bg').show();
 	}
 
