@@ -98,9 +98,19 @@ jQuery(document).ready(function($) {
 			invalid++;
 		}
 
-		if ( jQuery('.maintenance-wrapper').hasClass('recaptcha') ) {
-			jQuery.post( "https://www.google.com/recaptcha/api/siteverify", { secret: '6LdLQw8TAAAAAJ6igPPy9Q3VwSrP84xvSnzD06cb', response: jQuery('#mm-contact-form-recaptcha #g-recaptcha-response').val() }, function( data ) {
-				console.log(data);
+		if ( jQuery('.maintenance-wrapper').hasClass('recaptcha') && invalid == 0 ) {
+			jQuery.ajax({
+				type: 'POST',
+				url: mm_main.ajaxurl,
+				data: { 
+					'action': 'mm_check_recaptcha',
+					'recaptcha_response': jQuery('#mm-contact-form-recaptcha #g-recaptcha-response').val(), 
+				},
+				success: function(data) {
+					if ( data == 'true' ) {
+						jQuery('.maintenance-form').submit();
+					}
+				}
 			});
 		} else {
 			if ( invalid == 0 ) { jQuery('.maintenance-form').submit(); }

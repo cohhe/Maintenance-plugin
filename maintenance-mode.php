@@ -859,7 +859,14 @@ function main_get_countdown( $main_maintenance_settings ) {
 function main_get_mailchimp( $main_maintenance_settings ) {
 	$output = '';
 	if ( isset($main_maintenance_settings['mailchimp']) && $main_maintenance_settings['mailchimp'] != '' ) {
-		$output .= '<div class="main-mailchimp-wrapper">' . $main_maintenance_settings['mailchimp'] . '</div>';
+		$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
+
+		$output .= '<div class="main-mailchimp-wrapper">';
+		$output .= $main_maintenance_settings['mailchimp'];
+		if ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) ) {
+			 $output .= '<div id="mm-subscribe-form-recaptcha"></div>';
+		}
+		$output .= '</div>';
 	}
 	return $output;
 }
