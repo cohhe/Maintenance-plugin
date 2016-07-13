@@ -141,7 +141,11 @@ jQuery(document).ready(function($) {
 		main_settings += '"exclude":"'+jQuery('#main-exclude').val().replace(/\n/g, "|")+'",';
 		// MailChimp
 		if ( jQuery('#main-mailchimp').length ) {
-			main_settings += '"mailchimp":'+JSON.stringify(jQuery('#main-mailchimp').val().replace(/"/g, "'")).replace(/\\n/g, '').replace(/\\t/g, '')+',';
+			var old_code = jQuery('#main-mailchimp').val();
+			var old_html = jQuery('<div>'+old_code+'</div>');
+			old_html.find('link[type="text/css"]').remove();
+			old_html = old_html.html();
+			main_settings += '"mailchimp":'+JSON.stringify(old_html.replace(/"/g, "'")).replace(/\\n/g, '').replace(/\\t/g, '')+',';
 		}
 		// Access by ip
 		if ( jQuery('#main-access-by-ip').length ) {

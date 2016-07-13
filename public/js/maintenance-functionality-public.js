@@ -107,8 +107,11 @@ jQuery(document).ready(function($) {
 					'recaptcha_response': jQuery('#mm-contact-form-recaptcha #g-recaptcha-response').val(), 
 				},
 				success: function(data) {
-					if ( data == 'true' ) {
+					if ( data == "true" ) {
+						jQuery("#mm-contact-form-recaptcha").removeClass("invalid");
 						jQuery('.maintenance-form').submit();
+					} else {
+						jQuery("#mm-contact-form-recaptcha").addClass("invalid");
 					}
 				}
 			});
