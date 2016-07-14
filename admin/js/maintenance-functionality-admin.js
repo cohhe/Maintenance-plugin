@@ -167,6 +167,9 @@ jQuery(document).ready(function($) {
 			main_settings += '"recaptcha-key":"'+jQuery('#main-recaptcha-key').val()+'",';
 			main_settings += '"recaptcha-secret":"'+jQuery('#main-recaptcha-secret').val()+'",';
 		}
+		if ( jQuery('#main-after-countdown').length ) {
+			main_settings += '"main-after-countdown":"'+jQuery('#main-after-countdown').val()+'",';
+		}
 		// CSS
 		if ( jQuery('#main-maintenance-css').length ) {
 			main_settings += '"maintenance-css":"'+jQuery('#main-maintenance-css').val().replace(/"/g, "'")+'",';

@@ -73,7 +73,7 @@ class maintenance_func_Admin {
 		 * class.
 		 */
 
-		if ( $hook != 'toplevel_page_wp-maintenance' ) {
+		if ( $hook != 'toplevel_page_wp-maintenance' && $hook != 'maintenance_page_maintenancepropro-mode-subscribers' ) {
 			return;
 		}
 
@@ -101,7 +101,7 @@ class maintenance_func_Admin {
 		 * class.
 		 */
 
-		if ( $hook != 'toplevel_page_wp-maintenance' ) {
+		if ( $hook != 'toplevel_page_wp-maintenance' && $hook != 'maintenance_page_maintenancepropro-mode-subscribers' ) {
 			return;
 		}
 

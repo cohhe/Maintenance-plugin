@@ -58,7 +58,6 @@ register_deactivation_hook( __FILE__, 'maintenance_deactivate_maintenance_func' 
 define('maintenance_PLUGIN', plugin_dir_path( __FILE__ ));
 define('maintenance_PLUGIN_URI', plugin_dir_url( __FILE__ ));
 define('maintenance_PLUGIN_MENU_PAGE', 'wp-maintenance');
-define('maintenance_PLUGIN_SUBMENU_PAGE', 'maintenance-mode-list');
 define('maintenance_PLUGIN_MENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maintenance_PLUGIN_MENU_PAGE);
 define('maintenance_PLUGIN_SUBMENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maintenance_PLUGIN_SUBMENU_PAGE);
 require plugin_dir_path( __FILE__ ) . 'includes/class-maintenance-functionality.php';
@@ -94,8 +93,8 @@ function main_register_maintenance_menu_page() {
 
 	add_submenu_page(
 		maintenance_PLUGIN_MENU_PAGE,
-		__('Add New', 'maintenance-mode'),
-		__('Add New', 'maintenance-mode'),
+		__('Settings', 'maintenance-mode'),
+		__('Settings', 'maintenance-mode'),
 		'manage_options',
 		maintenance_PLUGIN_MENU_PAGE,
 		'main_maintenance_settings'
@@ -857,10 +856,24 @@ function main_get_countdown( $main_maintenance_settings ) {
 }
 
 function main_get_mailchimp( $main_maintenance_settings ) {
+	$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
 	$output = '';
-	if ( isset($main_maintenance_settings['mailchimp']) && $main_maintenance_settings['mailchimp'] != '' ) {
-		$main_maintenance_settings = (array)json_decode(get_option('main_maintenance_settings'));
 
+	if ( isset($main_maintenance_settings['our-subscribe']) && $main_maintenance_settings['our-subscribe'] == 'true' ) {
+		$output .= '<div class="main-mailchimp-wrapper">';
+		$output .= '
+		<div class="mm-our-subscribe-info"></div>
+		<form class="mm-our-subscribe" id="subForm">
+			<input type="email" class="mm-our-subscribe-email">
+			<input type="hidden" class="mm-subscribe-action" value="add-subscriber">
+			<button type="submit" class="mm-our-subscribe-submit">Subscribe</button>
+		</form>
+		';
+		if ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) ) {
+			 $output .= '<div id="mm-subscribe-form-recaptcha"></div>';
+		}
+		$output .= '</div>';
+	} else if ( isset($main_maintenance_settings['mailchimp']) && $main_maintenance_settings['mailchimp'] != '' ) {
 		$output .= '<div class="main-mailchimp-wrapper">';
 		$output .= $main_maintenance_settings['mailchimp'];
 		if ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) ) {
