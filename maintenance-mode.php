@@ -257,6 +257,67 @@ function main_maintenance_settings() {
 						<?php do_action('main_maintenance_first_column_bottom'); ?>
 						<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
 								<div class="white-box">
+									<h2>Contact us section</h2>
+									<p class="text-muted m-b-30 font-13">Here you can control what's shown at the contact us section.</p>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Contact us title</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature36" class="form-control" value="Contact us">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Contact us description</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature37" class="form-control" value="In need of our assistance? Feel free to use our contact details to reach us, we'll fladly find a way to help you!">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Address text</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature38" class="form-control" value="66 Grand central, New York">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Call us text</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature39" class="form-control" value="+(999) 999 999 999">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Write us text</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature40" class="form-control" value="email@example.com">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Contact form email</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature41" class="form-control" value="">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Enable reCAPTCHA?</label>
+										<div class="input-wrapper col-md-9">
+											<div class="main-maintenance-checkbox">
+												<span></span>
+												<input type="checkbox" id="main-profeature42">
+											</div>
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">reCAPTCHA site key</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature43" class="form-control" value="">
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">reCAPTCHA site secret</label>
+										<div class="input-wrapper col-md-9">
+											<input type="text" id="main-profeature44" class="form-control" value="">
+										</div>
+									</div>
+								</div>
+								<div class="white-box">
 									<h2>Access controls</h2>
 									<p class="text-muted m-b-30 font-13">Here you can control who can access your site.</p>
 									<div class="form-group bypass-url clearfix main-grayed">
@@ -387,20 +448,60 @@ function main_maintenance_settings() {
 							<?php do_action('main_maintenance_looks_bottom'); ?>
 							<?php if ( !function_exists('run_maintenancepro_func') ) { ?>
 								<div class="form-group clearfix">
+									<div class="form-group clearfix">
+										<div class="form-group clearfix main-grayed">
+											<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Countdown till</label>
+											<div class="input-wrapper col-md-9">
+												<input type="text" id="main-profeature8" class="form-control" value="" disabled>
+												<p class="text-muted font-13">Want your visitors to know when your site is going to be back? Add a countdown to your page!</p>
+											</div>
+										</div>
+									</div>
 									<div class="form-group clearfix main-grayed">
-										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">MailChimp form</label>
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">After Countdown expires</label>
+										<div class="col-md-9">
+											<select id="main-profeature30" class="form-control">
+												<option value="disable" selected>Disable coming soon page</option>
+												<option value="remove">Remove countdown</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Translate countdown</label>
+										<div class="input-wrapper countdown-translate col-md-9" style="padding-left: 0;">
+											<div class="col-md-3">
+												<label for="pm-image-to-url" class="control-label col-md-3">Hours</label>
+												<input type="text" id="main-profeature31" class="form-control" value="Hours">
+											</div>
+											<div class="col-md-3">
+												<label for="pm-image-to-url" class="control-label col-md-3">Minutes</label>
+												<input type="text" id="main-profeature32" class="form-control" value="Min">
+											</div>
+											<div class="col-md-3">
+												<label for="pm-image-to-url" class="control-label col-md-3">Seconds</label>
+												<input type="text" id="main-profeature33" class="form-control" value="Sec">
+											</div>
+											<div class="col-md-3">
+												<label for="pm-image-to-url" class="control-label col-md-3">Days</label>
+												<input type="text" id="main-profeature34" class="form-control" value="Days">
+											</div>
+										</div>
+									</div>
+									<div class="form-group clearfix main-grayed">
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Subscription form</label>
 										<div class="input-wrapper col-md-9">
 											<textarea id="main-profeature7" class="form-control" disabled></textarea>
 											<p class="text-muted font-13">Want to display your MailChimp signup form at the front page? Add it here!</p>
 										</div>
 									</div>
-								</div>
-								<div class="form-group clearfix">
 									<div class="form-group clearfix main-grayed">
-										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Countdown till</label>
+										<label for="pm-image-to-url" class="control-label col-md-3 main-maintenance-locked">Collect subscribers at dashboard</label>
 										<div class="input-wrapper col-md-9">
-											<input type="text" id="main-profeature8" class="form-control" value="" disabled>
-											<p class="text-muted font-13">Whant your visitorn to know when your site is going to be back? Add a countdown to your page!</p>
+											<div class="main-maintenance-checkbox">
+												<span></span>
+												<input type="checkbox" id="main-profeature35">
+											</div>
+											<p class="text-muted font-13">If this is enabled then your "Subscription form" will be replaced with plugins form that collects data at the dashboard!</p>
 										</div>
 									</div>
 								</div>
@@ -747,7 +848,6 @@ function main_save_maintenance() {
 
 	die(0);
 }
-add_action( 'wp_ajax_nopriv_main_save_maintenance_settings', 'main_save_maintenance' );
 add_action( 'wp_ajax_main_save_maintenance_settings', 'main_save_maintenance' );
 
 function sample_admin_notice__success() {
@@ -863,7 +963,7 @@ function main_get_mailchimp( $main_maintenance_settings ) {
 		$output .= '<div class="main-mailchimp-wrapper">';
 		$output .= '
 		<div class="mm-our-subscribe-info"></div>
-		<form class="mm-our-subscribe" id="subForm">
+		<form class="mm-our-subscribe">
 			<input type="email" class="mm-our-subscribe-email">
 			<input type="hidden" class="mm-subscribe-action" value="add-subscriber">
 			<button type="submit" class="mm-our-subscribe-submit">Subscribe</button>
