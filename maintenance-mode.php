@@ -501,7 +501,7 @@ function main_maintenance_settings() {
 												<span></span>
 												<input type="checkbox" id="main-profeature35">
 											</div>
-											<p class="text-muted font-13">If this is enabled then your "Subscription form" will be replaced with plugins form that collects data at the dashboard!</p>
+											<p class="text-muted font-13">If this is enabled then your "Subscription form" will be replaced with built-in form that collects data at the dashboard!</p>
 										</div>
 									</div>
 								</div>
@@ -967,8 +967,7 @@ function main_get_mailchimp( $main_maintenance_settings ) {
 			<input type="email" class="mm-our-subscribe-email">
 			<input type="hidden" class="mm-subscribe-action" value="add-subscriber">
 			<button type="submit" class="mm-our-subscribe-submit">Subscribe</button>
-		</form>
-		';
+		</form>';
 		if ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) ) {
 			 $output .= '<div id="mm-subscribe-form-recaptcha"></div>';
 		}

@@ -144,6 +144,12 @@ jQuery(document).ready(function($) {
 			var old_code = jQuery('#main-mailchimp').val();
 			var old_html = jQuery('<div>'+old_code+'</div>');
 			old_html.find('link[type="text/css"]').remove();
+			if ( old_html.find('#mce-responses').length ) {
+				var response = old_html.find('#mce-responses')["0"].outerHTML;
+				old_html.find('#mce-responses').remove();
+				old_html.find("#mc_embed_signup_scroll .clear").after(response);
+				// console.log(old_html.html());
+			}
 			old_html = old_html.html();
 			main_settings += '"mailchimp":'+JSON.stringify(old_html.replace(/"/g, "'")).replace(/\\n/g, '').replace(/\\t/g, '')+',';
 		}
