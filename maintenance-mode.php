@@ -962,12 +962,12 @@ function main_get_mailchimp( $main_maintenance_settings ) {
 	if ( isset($main_maintenance_settings['our-subscribe']) && $main_maintenance_settings['our-subscribe'] == 'true' ) {
 		$output .= '<div class="main-mailchimp-wrapper">';
 		$output .= '
-		<div class="mm-our-subscribe-info"></div>
 		<form class="mm-our-subscribe">
 			<input type="email" class="mm-our-subscribe-email">
 			<input type="hidden" class="mm-subscribe-action" value="add-subscriber">
 			<button type="submit" class="mm-our-subscribe-submit">Subscribe</button>
-		</form>';
+		</form>
+		<div class="mm-our-subscribe-info"></div>';
 		if ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) ) {
 			 $output .= '<div id="mm-subscribe-form-recaptcha"></div>';
 		}
