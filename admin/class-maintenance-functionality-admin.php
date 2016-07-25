@@ -73,6 +73,8 @@ class maintenance_func_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_style( 'maintenance-main-admin-css', plugin_dir_url( __FILE__ ) . 'css/maintenance-main-admin.css', array(), $this->version, 'all' );
+
 		if ( $hook != 'toplevel_page_wp-maintenance' && $hook != 'maintenance_page_maintenancepropro-mode-subscribers' ) {
 			return;
 		}
@@ -100,6 +102,8 @@ class maintenance_func_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+
+		wp_enqueue_script( 'maintenance-main-admin', plugin_dir_url( __FILE__ ) . 'js/maintenance-main-admin.js', array( 'jquery' ), $this->version, false );
 
 		if ( $hook != 'toplevel_page_wp-maintenance' && $hook != 'maintenance_page_maintenancepropro-mode-subscribers' ) {
 			return;

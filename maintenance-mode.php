@@ -16,7 +16,7 @@
  * Plugin Name:       Maintenance mode
  * Plugin URI:        https://cohhe.com/
  * Description:       This plugin adds maintenance mode functionality to your website
- * Version:           1.1
+ * Version:           1.2
  * Author:            Cohhe
  * Author URI:        https://cohhe.com/
  * License:           GPL-2.0+
@@ -852,6 +852,7 @@ add_action( 'wp_ajax_main_save_maintenance_settings', 'main_save_maintenance' );
 
 function sample_admin_notice__success() {
 	$user = wp_get_current_user();
+	if ( get_option('main_maintenance_rating_notice') != 'hide' && time() - get_option('main_maintenance_rating_notice') > 432000 ) {
 	?>
 	<div class="main-maintenance-notice">
 		<span class="main-notice-left">
@@ -867,11 +868,9 @@ function sample_admin_notice__success() {
 		</div>
 		<div class="clearfix"></div>
 	</div>
-	<?php
+	<?php }
 }
-if ( get_option('main_maintenance_rating_notice') != 'hide' && time() - get_option('main_maintenance_rating_notice') > 432000 ) {
-	add_action( 'admin_notices', 'sample_admin_notice__success' );
-}
+add_action( 'admin_notices', 'sample_admin_notice__success' );
 
 function main_dismiss_maintenance_notice() {
 	update_option('main_maintenance_rating_notice', 'hide');

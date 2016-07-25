@@ -363,64 +363,6 @@ p {
 	padding: 7px 12px;
 }
 
-.main-maintenance-notice {
-	background: #fff;
-	border-top: 4px;
-	display: block;
-	min-height: 68px;
-	position: relative;
-	margin: 30px 20px 0 2px;
-	background-color: #fff;
-	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-	border: 1px solid #ccc;
-}
-
-.main-notice-left {
-	float: left;
-	width: 5%;
-	padding: 5px;
-	box-sizing: border-box;
-}
-
-.main-notice-left img {
-	width: 100%;
-	vertical-align: middle;
-}
-
-.main-notice-center {
-	width: 75%;
-	float: left;
-	padding: 10px;
-	box-sizing: border-box;
-}
-
-.main-notice-right {
-	width: 20%;
-	float: left;
-	padding: 10px;
-	box-sizing: border-box;
-	height: 85px;
-	border-left: 1px solid #ccc;
-	margin-top: 0;
-	background-color: #f8f8f8;
-	text-align: center;
-}
-
-.main-notice-center p:last-child {
-	margin-bottom: 0;
-}
-
-.main-notice-right a {
-	float: none;
-	margin-top: 17px !important;
-	display: inline-block !important;
-}
-
-.main-notice-right .main-maintenance-dismiss {
-	margin-left: 10px;
-}
-
 .form-group.bypass-url b {
 	float: left;
 	margin-top: 12px;
