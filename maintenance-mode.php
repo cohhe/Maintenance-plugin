@@ -673,6 +673,8 @@ function main_get_content() {
 		ob_start();
 		header("Content-type: text/html; charset=$charset");
 		header("$protocol 503 Service Unavailable", TRUE, 503);
+
+		$default_themes = array( 'default', 'style2', 'style3', 'style4', 'style5', 'style6', 'style7', 'style8', 'style9', 'style10', 'style11' );
 		?>
 
 		
@@ -700,16 +702,27 @@ function main_get_content() {
 		<?php } ?>
 		<meta name="robots" content="<?php echo ($main_maintenance_settings['robots']=='noindex'?'noindex, nofollow':'index, follow'); ?>">
 		<div class="maintenance-wrapper template-<?php echo (isset($main_maintenance_settings['template'])?$main_maintenance_settings['template']:'default')?> <?php echo ( ( ( isset($main_maintenance_settings['recaptcha-key']) && $main_maintenance_settings['recaptcha-key'] != '' ) && ( isset($main_maintenance_settings['recaptcha-secret']) && $main_maintenance_settings['recaptcha-secret'] != '' ) )?'recaptcha':'' ) ?>">
-			<?php if ( isset($main_maintenance_settings['animation']) && $main_maintenance_settings['animation'] != 'none' ) { ?>
-				<canvas id="main-animation-canvas"></canvas>
-			<?php } ?>
-			<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
-			<?php if ( isset($main_maintenance_settings['maintenance-login']) && $main_maintenance_settings['maintenance-login'] == 'true' && !is_user_logged_in() ) {
-				do_action('main_maintenance_login_form');
-			} ?>
-			<?php if ( function_exists('run_maintenancepro_func') ) {
-				// && isset($main_maintenance_settings['template']) && $main_maintenance_settings['template'] != 'style5'
-				do_action('main_maintenance_contact_us');
+			<?php if ( in_array($main_maintenance_settings['template'], $default_themes) ) { ?>
+				<?php if ( isset($main_maintenance_settings['animation']) && $main_maintenance_settings['animation'] != 'none' ) { ?>
+					<canvas id="main-animation-canvas"></canvas>
+				<?php } ?>
+				<?php main_prepare_html( $template['0'], $main_maintenance_settings ); ?>
+				<?php if ( isset($main_maintenance_settings['maintenance-login']) && $main_maintenance_settings['maintenance-login'] == 'true' && !is_user_logged_in() ) {
+					do_action('main_maintenance_login_form');
+				} ?>
+				<?php if ( function_exists('run_maintenancepro_func') ) {
+					// && isset($main_maintenance_settings['template']) && $main_maintenance_settings['template'] != 'style5'
+					do_action('main_maintenance_contact_us');
+				} ?>
+			<?php } else {
+				$theme_html = get_template_directory().'/maintenance-template/'.$main_maintenance_settings['template'].'/theme-html.php';
+				$theme_style = get_template_directory().'/maintenance-template/'.$main_maintenance_settings['template'].'/theme-style.css';
+				if ( file_exists($theme_html) ) {
+					include $theme_html;
+				}
+				if ( file_exists($theme_style) ) {
+					echo "<link href='".get_template_directory_uri().'/maintenance-template/'.$main_maintenance_settings['template'].'/theme-style.css'."' rel='stylesheet' type='text/css'>";
+				}
 			} ?>
 		</div>
 		<?php if ( $main_maintenance_settings['background-image'] != '' ) { ?>
