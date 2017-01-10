@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
 
 	jQuery('.input-wrapper.file-upload a.choose-image').on('click', function() {
 		var $wpimageupload = jQuery(this).parent().find('input');
-		var $wpdeleteimage = jQuery(this).parent().find('a.delete-image');
+		var $wpimageparent = jQuery(this).parent();
 		var image = wp.media({ 
             title: 'Upload Image',
             multiple: false
@@ -102,8 +102,13 @@ jQuery(document).ready(function($) {
             var uploaded_image = image.state().get('selection').first();
             var image_url = uploaded_image.toJSON().url;
             $wpimageupload.val(image_url).trigger('input');
-            $wpdeleteimage.removeClass('hidden');
+            $wpimageparent.addClass('remove-active');
         });
+	});
+
+	jQuery(document).on('click', '.file-upload .delete-image', function() {
+		jQuery(this).parent().find('input').val('');
+		jQuery(this).parent().removeClass('remove-active');
 	});
 
 	jQuery(document).on('click', '.save-main-maintenance', function() {

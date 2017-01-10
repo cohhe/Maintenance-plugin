@@ -329,7 +329,8 @@ p {
 	position: relative;
 }
 
-.input-wrapper.file-upload a.choose-image {
+.input-wrapper.file-upload a.choose-image,
+.input-wrapper.file-upload a.delete-image {
 	font-size: 14px;
 	line-height: 1.42857143;
 	padding: 7px 12px;
@@ -341,8 +342,22 @@ p {
 	right: 16px;
 }
 
+.input-wrapper.file-upload a.delete-image {
+	background-color: #d53333;
+	right: 129px;
+	display: none;
+}
+
+.input-wrapper.file-upload.remove-active a.delete-image {
+	display: block;
+}
+
 .input-wrapper.file-upload input {
 	padding-right: 130px;
+}
+
+.input-wrapper.file-upload.remove-active input {
+	padding-right: 200px;
 }
 
 .input-wrapper.file-upload input[disabled] {

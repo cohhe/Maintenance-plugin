@@ -403,9 +403,10 @@ function main_maintenance_settings() {
 							<?php } ?>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Background image</label>
-								<div class="input-wrapper file-upload col-md-9">
+								<div class="input-wrapper file-upload <?php echo (isset($main_maintenance_settings['background-image'])&&$main_maintenance_settings['background-image']!=''?'remove-active':''); ?> col-md-9">
 									<a href="javascript:void(0)" class="choose-image">Choose image</a>
 									<input type="text" id="main-background-image" class="form-control" value="<?php echo (isset($main_maintenance_settings['background-image'])?$main_maintenance_settings['background-image']:''); ?>" disabled>
+									<a href="javascript:void(0)" class="delete-image">Remove</a>
 								</div>
 							</div>
 							<div class="form-group clearfix">
@@ -419,9 +420,10 @@ function main_maintenance_settings() {
 							</div>
 							<div class="form-group clearfix">
 								<label for="pm-image-to-url" class="control-label col-md-3">Logo</label>
-								<div class="input-wrapper file-upload col-md-9">
+								<div class="input-wrapper file-upload <?php echo (isset($main_maintenance_settings['maintenance-logo'])&&$main_maintenance_settings['maintenance-logo']!=''?'remove-active':''); ?> col-md-9">
 									<a href="javascript:void(0)" class="choose-image">Choose image</a>
 									<input type="text" id="main-maintenance-logo" class="form-control" value="<?php echo (isset($main_maintenance_settings['maintenance-logo'])?$main_maintenance_settings['maintenance-logo']:''); ?>">
+									<a href="javascript:void(0)" class="delete-image">Remove</a>
 								</div>
 							</div>
 							<div class="form-group clearfix">
