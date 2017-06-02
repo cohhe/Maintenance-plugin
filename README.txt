@@ -1,9 +1,9 @@
 === Maintenance mode ===
 Contributors: Cohhe
 Tags: administration, background, blur, coming soon, customize page, fullscreen, login, maintenance, maintenance mode, splash page, under construction, coming soon page, construction, countdown, landing page, launch, offline, site is offline, wordpress maintenance mode, wordpress under construction, newsletter 
-Requires at least: 4.2
-Tested up to: 4.5.3
-Stable tag: 1.2
+Requires at least: 4.5
+Tested up to: 4.8
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,11 @@ Installing "Best Maintenance mode" can be done either by searching for "Best Mai
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= 1.3 =
+* Checked WordPress 4.8 compatibility
+* Custom template support
+* Can remove background image and logo
 
 = 1.2 =
 * Fixed overall responsivenss

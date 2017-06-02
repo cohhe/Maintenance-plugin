@@ -16,7 +16,7 @@
  * Plugin Name:       Maintenance mode
  * Plugin URI:        https://cohhe.com/
  * Description:       This plugin adds maintenance mode functionality to your website
- * Version:           1.2
+ * Version:           1.3
  * Author:            Cohhe
  * Author URI:        https://cohhe.com/
  * License:           GPL-2.0+
@@ -59,7 +59,6 @@ define('maintenance_PLUGIN', plugin_dir_path( __FILE__ ));
 define('maintenance_PLUGIN_URI', plugin_dir_url( __FILE__ ));
 define('maintenance_PLUGIN_MENU_PAGE', 'wp-maintenance');
 define('maintenance_PLUGIN_MENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maintenance_PLUGIN_MENU_PAGE);
-define('maintenance_PLUGIN_SUBMENU_PAGE_URL', get_admin_url() . 'admin.php?page=' . maintenance_PLUGIN_SUBMENU_PAGE);
 require plugin_dir_path( __FILE__ ) . 'includes/class-maintenance-functionality.php';
 
 
